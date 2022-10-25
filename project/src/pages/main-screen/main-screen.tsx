@@ -4,13 +4,11 @@ type MainScreenProps = {
   title: string;
   genre: string;
   releaseYear: number;
-
 }
-
 
 export default function MainScreen(props: MainScreenProps): JSX.Element {
   return (
-    <html lang="en">
+    <>
       <head>
         <meta charSet="UTF-8"/>
         <title>WTW</title>
@@ -118,9 +116,7 @@ export default function MainScreen(props: MainScreenProps): JSX.Element {
           </ul>
 
           <div className="catalog__films-list">
-
             { Array(20).fill(<MovieCard/>) }
-
           </div>
 
           <div className="catalog__more">
@@ -142,7 +138,7 @@ export default function MainScreen(props: MainScreenProps): JSX.Element {
           </div>
         </footer>
       </div>
-    </html>
+    </>
   );
 }
 
