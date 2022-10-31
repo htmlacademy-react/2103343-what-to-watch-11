@@ -8,8 +8,11 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PrivateRoute from '../private-route/private-route';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
+import {FilmsType, ReviewType} from '../../types/types';
 
 type AppScreenProps = {
+  movies: FilmsType[];
+  reviews: ReviewType[];
   title: string;
   genre: string;
   releaseYear: number;

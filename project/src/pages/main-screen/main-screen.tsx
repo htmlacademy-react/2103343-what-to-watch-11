@@ -1,9 +1,10 @@
-import MovieCard from '../../components/movie-card/movie-card';
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
-
+import {FilmsType} from '../../types/types';
+import MovieList from '../../components/movie-list/movie-list';
 
 type MainScreenProps = {
+  movies: FilmsType[];
   title: string;
   genre: string;
   releaseYear: number;
@@ -105,9 +106,7 @@ export default function MainScreen(props: MainScreenProps): JSX.Element {
             </li>
           </ul>
 
-          <div className="catalog__films-list">
-            { Array(20).fill(<MovieCard/>) }
-          </div>
+          <MovieList movies={props.movies}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
