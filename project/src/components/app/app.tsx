@@ -34,13 +34,13 @@ function App(props: AppScreenProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-              <MyListScreen />
+              <MyListScreen myMovies={props.movies}/>
             </PrivateRoute>
           }
         />
         <Route
           path={`${AppRoute.Movie}/:id`}
-          element={<MovieScreen />}
+          element={<MovieScreen movies={props.movies}/>}
         />
         <Route
           path={`${AppRoute.Movie}/:id${AppRoute.AddReview}`}
@@ -52,7 +52,7 @@ function App(props: AppScreenProps): JSX.Element {
         />
         <Route
           path={`${AppRoute.Player}/:id`}
-          element={<PlayerScreen />}
+          element={<PlayerScreen movies={props.movies} />}
         />
         <Route
           path='*'

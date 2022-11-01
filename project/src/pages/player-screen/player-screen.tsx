@@ -1,9 +1,25 @@
-export default function PlayerScreen(): JSX.Element {
+import { useParams, useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { FilmsType } from '../../types/types';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
+
+type PlayerScreenProps = {
+  movies: FilmsType[];
+}
+
+export default function PlayerScreen(props: PlayerScreenProps): JSX.Element {
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const movie = props.movies.find((elem: FilmsType) => elem.id.toString() === params.id);
+  if (movie === undefined) {
+    return <NotFoundScreen />;
+  }
   return (
     <div className="player">
-      <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
+      <video src="#" className="player__video" poster={movie.backgroundImage}></video>
 
-      <button type="button" className="player__exit">Exit</button>
+      <button type="button" className="player__exit" onClick={() => navigate(`${AppRoute.Movie}/${movie.id}`)}>Exit</button>
 
       <div className="player__controls">
         <div className="player__controls-row">
@@ -11,7 +27,7 @@ export default function PlayerScreen(): JSX.Element {
             <progress className="player__progress" value="30" max="100"></progress>
             <div className="player__toggler" style={{left: '30%'}}>Toggler</div>
           </div>
-          <div className="player__time-value">1:30:29</div>
+          <div className="player__time-value">{movie.runTime}</div>
         </div>
 
         <div className="player__controls-row">
@@ -21,7 +37,7 @@ export default function PlayerScreen(): JSX.Element {
             </svg>
             <span>Play</span>
           </button>
-          <div className="player__name">Transpotting</div>
+          <div className="player__name">{movie.name}</div>
 
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
