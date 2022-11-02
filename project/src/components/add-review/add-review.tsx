@@ -1,22 +1,20 @@
-import React from 'react';
+import { useState, ChangeEvent } from 'react';
 import { AddReviewType } from '../../types/types';
 
-
-
 export default function AddReview (): JSX.Element{
-  const [formData, setFormData] = React.useState<AddReviewType>({
+  const [formData, setFormData] = useState<AddReviewType>({
     rating: 0,
     comment: '',
   });
 
-  const [ratingValue, setRatingValue] = React.useState<number>(0);
+  const [ratingValue, setRatingValue] = useState<number>(0);
 
-  const handleRatingValueChange = (evt: React.ChangeEvent<HTMLInputElement>) => {
+  const handleRatingValueChange = (evt: ChangeEvent<HTMLInputElement>) => {
     setRatingValue(Number(evt.target.value));
     setFormData({...formData, rating: Number(evt.target.value)});
   };
 
-  const handleTextChange = (evt: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleTextChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     if (evt.target.value) {
       setFormData({...formData, comment: evt.target.value});
     } else {
@@ -28,7 +26,7 @@ export default function AddReview (): JSX.Element{
     <form action="#" className="add-review__form">
       <div className="rating">
         <div className="rating__stars">
-          <input className="rating__input" id="star-10" type="radio" name="rating" value="10"  onChange={handleRatingValueChange} checked={ratingValue === 10}/>
+          <input className="rating__input" id="star-10" type="radio" name="rating" value="10" onChange={handleRatingValueChange} checked={ratingValue === 10}/>
           <label className="rating__label" htmlFor="star-10">Rating 10</label>
 
           <input className="rating__input" id="star-9" type="radio" name="rating" value="9" onChange={handleRatingValueChange} checked={ratingValue === 9}/>
@@ -60,13 +58,12 @@ export default function AddReview (): JSX.Element{
         </div>
       </div>
 
-      <div className="add-review__text">
+      <div className="add-review__text" >
         <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={handleTextChange} value={formData.comment}></textarea>
         <div className="add-review__submit">
           <button className="add-review__btn" type="submit">Post</button>
         </div>
-
       </div>
     </form>
   );
-};
+}
