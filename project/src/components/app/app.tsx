@@ -58,6 +58,11 @@ function App(props: AppScreenProps): JSX.Element {
           path='*'
           element={<NotFoundScreen />}
         />
+        <Route
+          path={AppRoute.NotFound}
+          element={<NotFoundScreen />}
+        />
+
       </Routes>
     </BrowserRouter>
   );

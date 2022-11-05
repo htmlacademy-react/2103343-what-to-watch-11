@@ -2,8 +2,7 @@ import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import { FilmsType } from '../../types/types';
 import { AppRoute } from '../../const';
-import { Link, useParams, useNavigate } from 'react-router-dom';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import MovieList from '../../components/movie-list/movie-list';
 import { getRatingCountToName } from '../../utils';
 
@@ -16,8 +15,10 @@ export default function MovieScreen(props: MovieScreenProps): JSX.Element {
   const navigate = useNavigate();
 
   const movie = props.movies.find((elem: FilmsType) => elem.id.toString() === params.id);
-  if (movie === undefined) {
-    return <NotFoundScreen />;
+  if (!movie) {
+    return (
+      <Navigate replace to="/404" />
+    );
   }
 
   const similarMovies = props.movies.slice(0, 4);

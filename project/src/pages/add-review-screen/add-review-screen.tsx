@@ -2,8 +2,7 @@ import Logo from '../../components/logo/logo';
 import { FilmsType } from '../../types/types';
 import { AppRoute } from '../../const';
 import AddReview from '../../components/add-review/add-review';
-import { useParams, Link } from 'react-router-dom';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { useParams, Link, Navigate } from 'react-router-dom';
 
 type AddReviewScreenPorps = {
   movies: FilmsType[];
@@ -13,8 +12,10 @@ export default function AddReviewScreen(props: AddReviewScreenPorps): JSX.Elemen
   const params = useParams();
 
   const movie = props.movies.find((elem: FilmsType) => elem.id.toString() === params.id);
-  if (movie === undefined) {
-    return <NotFoundScreen />;
+  if (!movie) {
+    return (
+      <Navigate replace to="/404" />
+    );
   }
   return (
     <section className="film-card film-card--full" style={{background: `${movie.backgroundColor}`}}>

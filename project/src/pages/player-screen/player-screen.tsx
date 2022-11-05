@@ -1,7 +1,6 @@
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { FilmsType } from '../../types/types';
-import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 type PlayerScreenProps = {
   movies: FilmsType[];
@@ -12,8 +11,10 @@ export default function PlayerScreen(props: PlayerScreenProps): JSX.Element {
   const navigate = useNavigate();
 
   const movie = props.movies.find((elem: FilmsType) => elem.id.toString() === params.id);
-  if (movie === undefined) {
-    return <NotFoundScreen />;
+  if (!movie) {
+    return (
+      <Navigate replace to="/404" />
+    );
   }
   return (
     <div className="player">
