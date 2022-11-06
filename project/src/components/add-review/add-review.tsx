@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, SyntheticEvent } from 'react';
 import { AddReviewType } from '../../types/types';
 import RatingStars from '../rating-stars/rating-stars';
 
@@ -11,8 +11,9 @@ export default function AddReview (): JSX.Element{
     comment: '',
   });
 
-  const handleFormChange = (evt: ChangeEvent<HTMLFormElement>) => {
-    setFormData({...formData, [evt.target.name]: evt.target.value});
+  const handleFormChange = (evt: SyntheticEvent) => {
+    const target = evt.target as HTMLInputElement | HTMLTextAreaElement;
+    setFormData({...formData, [target.name]: target.value});
   };
 
   return (
