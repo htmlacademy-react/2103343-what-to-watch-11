@@ -1,6 +1,6 @@
-import {FilmsType} from '../../types/types';
+import { FilmsType } from '../../types/types';
 import MovieCard from '../movie-card/movie-card';
-import {useState} from 'react';
+import { useState } from 'react';
 
 type MovieListProps = {
   movies: FilmsType[];
@@ -14,8 +14,8 @@ export default function MovieList({movies}: MovieListProps): JSX.Element {
   };
 
   return (
-    <div className="catalog__films-list" onMouseOver={handleFilmCardMouseOver}>
-      {movies.map((movie: FilmsType) => <MovieCard movie={movie} key={movie.id}/>)}
+    <div className="catalog__films-list" onMouseOver={handleFilmCardMouseOver} onMouseOut={() => setActiveCard(0)}>
+      {movies.map((movie: FilmsType) => <MovieCard movie={movie} key={movie.id} />)}
     </div>
   );
 }
