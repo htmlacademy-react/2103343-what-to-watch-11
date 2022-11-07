@@ -20,7 +20,7 @@ export default function MovieCard ({movie}: MovieCardProps): JSX.Element {
       <div className="small-film-card__image">
         {
           activeCard
-            ? <VideoPlayer movie={movie} />
+            ? <VideoPlayer movie={movie} isPlaying={activeCard} />
             : <img src={movie.previewImage} alt={movie.name} width="280" height="175" />
         }
       </div>
