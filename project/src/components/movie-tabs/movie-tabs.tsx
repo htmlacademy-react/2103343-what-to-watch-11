@@ -22,6 +22,8 @@ export default function MovieTabs ({movie, reviews}: MovieTabsProps): JSX.Elemen
         return <MovieDetails movie={movie} />;
       case TabValue.Reviews:
         return <MovieReviews reviews={reviews} />;
+      default :
+        return <MovieOverview movie={movie} />;
     }
   };
 

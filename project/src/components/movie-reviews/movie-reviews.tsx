@@ -6,13 +6,21 @@ type MovieReviewsProps = {
 }
 
 export default function MovieReviews ({reviews}: MovieReviewsProps): JSX.Element {
+
+  const getSeparateReviews = (reviews) => {
+    const half = reviews.length / 2;
+    return [reviews.slice(0, half), [reviews.slice(half)]
+  }
+
+  const [firstHalf, secondHalf] = getSeparateReviews(reviews);
+
   return (
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        {reviews.slice(0, reviews.length / 2).map((review) => <MovieReview key={review.id} review={review}/>)}
+        {firstHalf.map((review) => <MovieReview key={review.id} review={review}/>)}
       </div>
       <div className="film-card__reviews-col">
-        {reviews.slice(reviews.length / 2).map((review) => <MovieReview key={review.id} review={review}/>)}
+        {secondHalf.map((review) => <MovieReview key={review.id} review={review}/>)}
       </div>
     </div>
   );
