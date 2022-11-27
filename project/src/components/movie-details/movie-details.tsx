@@ -1,10 +1,10 @@
-import { FilmsType } from "../../types/types";
+import { FilmsType } from '../../types/types';
 
 type MovieDetailsProps = {
-  movie: FilmsType
+  movie: FilmsType;
 }
 
- export default function MovieDetails ({movie}: MovieDetailsProps): JSX.Element {
+export default function MovieDetails ({movie}: MovieDetailsProps): JSX.Element {
   return (
     <div className="film-card__text film-card__row">
       <div className="film-card__text-col">
@@ -34,4 +34,4 @@ type MovieDetailsProps = {
       </div>
     </div>
   );
- }
+}
