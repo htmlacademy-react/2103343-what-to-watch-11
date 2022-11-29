@@ -9,6 +9,8 @@ import PrivateRoute from '../private-route/private-route';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import {FilmsType, ReviewType} from '../../types/types';
+import { useAppDispatch } from '../../hooks';
+import { setFilms } from '../../store/action';
 
 type AppScreenProps = {
   movies: FilmsType[];
@@ -19,6 +21,10 @@ type AppScreenProps = {
 }
 
 function App(props: AppScreenProps): JSX.Element {
+
+  const dispatch = useAppDispatch();
+  dispatch(setFilms(props.movies));
+
   return (
     <BrowserRouter>
       <Routes>
