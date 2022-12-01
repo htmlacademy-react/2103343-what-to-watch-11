@@ -4,7 +4,7 @@ import {FilmsType} from '../../types/types';
 import MovieList from '../../components/movie-list/movie-list';
 import { useAppSelector } from '../../hooks';
 import GenreList from '../../components/genres-list/genres-list';
-import { allGenresFilterName } from '../../const';
+import { getCurrentGenre, getGenres, getSelectedFilms } from '../../utils';
 
 type MainScreenProps = {
   movies: FilmsType[];
@@ -13,22 +13,10 @@ type MainScreenProps = {
   releaseYear: number;
 }
 
-const getMovieListByGenre = (films: FilmsType[], genre: string) => {
-  if (genre === allGenresFilterName) {
-    return films;
-  }
-  return films.filter((film) => film.genre === genre);
-};
-
-const getGenres = (films: FilmsType[]): string[] => {
-  const genres = new Set(films.map((film) => film.genre));
-  return [allGenresFilterName, ...genres];
-};
-
 export default function MainScreen(props: MainScreenProps): JSX.Element {
 
-  const currentGenre = useAppSelector((state) => state.genre);
-  const selectedFilms = useAppSelector((state) => getMovieListByGenre(state.films, currentGenre));
+  const currentGenre = useAppSelector(getCurrentGenre);
+  const selectedFilms = useAppSelector(getSelectedFilms(curentGenre));
   const genres = getGenres(props.movies);
   return (
     <>
