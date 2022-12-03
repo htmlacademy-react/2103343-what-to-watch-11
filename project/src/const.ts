@@ -19,3 +19,6 @@ export enum TabValue {
   Details = 'details',
   Reviews = 'reviews',
 }
+
+export const allGenresFilterName = 'All Genres';
+

@@ -8,10 +8,12 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PrivateRoute from '../private-route/private-route';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import {FilmsType, ReviewType} from '../../types/types';
+import { ReviewType} from '../../types/types';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setFilms } from '../../store/action';
+import { getFilms } from '../../utils';
 
 type AppScreenProps = {
-  movies: FilmsType[];
   reviews: ReviewType[];
   title: string;
   genre: string;
@@ -19,6 +21,10 @@ type AppScreenProps = {
 }
 
 function App(props: AppScreenProps): JSX.Element {
+  const movies = useAppSelector(getFilms);
+  const dispatch = useAppDispatch();
+  dispatch(setFilms(movies));
+
   return (
     <BrowserRouter>
       <Routes>
@@ -34,25 +40,25 @@ function App(props: AppScreenProps): JSX.Element {
           path={AppRoute.MyList}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <MyListScreen myMovies={props.movies}/>
+              <MyListScreen />
             </PrivateRoute>
           }
         />
         <Route
           path={`${AppRoute.Movie}/:id`}
-          element={<MovieScreen movies={props.movies} reviews={props.reviews}/>}
+          element={<MovieScreen reviews={props.reviews}/>}
         />
         <Route
           path={`${AppRoute.Movie}/:id${AppRoute.AddReview}`}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <AddReviewScreen movies={props.movies} />
+              <AddReviewScreen />
             </PrivateRoute>
           }
         />
         <Route
           path={`${AppRoute.Player}/:id`}
-          element={<PlayerScreen movies={props.movies} />}
+          element={<PlayerScreen />}
         />
         <Route
           path='*'

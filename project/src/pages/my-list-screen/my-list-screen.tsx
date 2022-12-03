@@ -1,21 +1,20 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
-
-import { FilmsType } from '../../types/types';
 import MovieList from '../../components/movie-list/movie-list';
+import { useAppSelector } from '../../hooks';
+import { getFilms } from '../../utils';
 
-type MyListScreenProps = {
-  myMovies: FilmsType[];
-}
+export default function MyListScreen(): JSX.Element {
 
-export default function MyListScreen(props: MyListScreenProps): JSX.Element {
+  const myMovies = useAppSelector(getFilms);
+
   return (
     <div className="user-page">
       <header className="page-header user-page__head">
 
         <Logo/>
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{props.myMovies.length}</span></h1>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{myMovies.length}</span></h1>
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
@@ -31,7 +30,7 @@ export default function MyListScreen(props: MyListScreenProps): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <MovieList movies={props.myMovies}/>
+        <MovieList movies={myMovies}/>
 
       </section>
 

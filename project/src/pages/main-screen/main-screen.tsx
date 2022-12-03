@@ -1,16 +1,23 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
-import {FilmsType} from '../../types/types';
 import MovieList from '../../components/movie-list/movie-list';
+import { useAppSelector } from '../../hooks';
+import GenreList from '../../components/genres-list/genres-list';
+import { getCurrentGenre, getFilms, getGenres, getMovieListByGenre } from '../../utils';
 
 type MainScreenProps = {
-  movies: FilmsType[];
   title: string;
   genre: string;
   releaseYear: number;
 }
 
-export default function MainScreen(props: MainScreenProps): JSX.Element {
+export default function MainScreen({title, genre, releaseYear}: MainScreenProps): JSX.Element {
+
+  const movies = useAppSelector(getFilms);
+  const currentGenre = useAppSelector(getCurrentGenre);
+  const selectedFilms = useAppSelector((state) => getMovieListByGenre(state.films, currentGenre));
+  const genres = getGenres(movies);
+
   return (
     <>
       <section className="film-card">
@@ -43,10 +50,10 @@ export default function MainScreen(props: MainScreenProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{props.title}</h2>
+              <h2 className="film-card__title">{title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{props.genre}</span>
-                <span className="film-card__year">{props.releaseYear}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{releaseYear}</span>
               </p>
 
               <div className="film-card__buttons">
@@ -73,40 +80,9 @@ export default function MainScreen(props: MainScreenProps): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
-            </li>
-            <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
-            </li>
-          </ul>
+          <GenreList currentGenre={currentGenre} genres={genres}/>
 
-          <MovieList movies={props.movies}/>
+          <MovieList movies={selectedFilms}/>
 
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>

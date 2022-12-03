@@ -1,3 +1,6 @@
+import { allGenresFilterName } from './const';
+import { FilmsType } from './types/types';
+
 export const getRatingCountToName = (rating: number) => {
   if (rating > 0 && rating < 3) {
     return 'Bad';
@@ -14,3 +17,22 @@ export const getRatingCountToName = (rating: number) => {
     return 'Awesome';
   }
 };
+
+export const getMovieListByGenre = (films: FilmsType[], genre: string) => {
+  if (genre === allGenresFilterName) {
+    return films;
+  }
+  return films.filter((film) => film.genre === genre);
+};
+
+export const getGenres = (films: FilmsType[]): string[] => {
+  const genres = new Set(films.map((film) => film.genre));
+  return [allGenresFilterName, ...genres];
+};
+
+
+// AppSelector functions
+export const getCurrentGenre = (state: {genre: string}) => state.genre;
+export const getFilms = (state: {films: FilmsType[]}) => state.films;
+
+
