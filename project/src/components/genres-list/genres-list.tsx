@@ -1,6 +1,5 @@
 import cn from 'classnames';
 import { useAppDispatch } from '../../hooks';
-import { MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { changeGenre } from '../../store/action';
 
@@ -25,10 +24,7 @@ export default function GenreList({currentGenre, genres}:GenreListProps): JSX.El
           <Link
             to="#"
             className="catalog__genres-link"
-            onClick={(evt: MouseEvent) => {
-              evt.preventDefault();
-              dispatch(changeGenre(genre));
-            }}
+            onClick={() => dispatch(changeGenre(genre))}
           >
             {genre}
           </Link>

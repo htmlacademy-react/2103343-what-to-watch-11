@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import App from './components/app/app';
-import {filmsMock} from './mocks/films';
 import { reviewMock} from './mocks/reviews';
 import { store } from './store';
 
@@ -21,7 +20,6 @@ root.render(
     <Provider store={store}>
       <App
         {...featuredMovie}
-        movies={filmsMock}
         reviews={reviewMock}
       />
     </Provider>

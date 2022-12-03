@@ -5,24 +5,26 @@ import { AppRoute } from '../../const';
 import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import MovieList from '../../components/movie-list/movie-list';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
+import { useAppSelector } from '../../hooks';
+import { getFilms } from '../../utils';
 
 type MovieScreenProps = {
-  movies: FilmsType[];
   reviews: ReviewType[];
 }
 
-export default function MovieScreen(props: MovieScreenProps): JSX.Element {
+export default function MovieScreen({reviews}: MovieScreenProps): JSX.Element {
+  const movies = useAppSelector(getFilms);
   const params = useParams();
   const navigate = useNavigate();
 
-  const movie = props.movies.find((elem: FilmsType) => elem.id.toString() === params.id);
+  const movie = movies.find((elem: FilmsType) => elem.id.toString() === params.id);
   if (!movie) {
     return (
       <Navigate replace to="/404" />
     );
   }
 
-  const similarMovies = props.movies.slice(0, 4);
+  const similarMovies = movies.slice(0, 4);
 
   return (
     <>
@@ -86,7 +88,7 @@ export default function MovieScreen(props: MovieScreenProps): JSX.Element {
               />
             </div>
 
-            <MovieTabs movie={movie} reviews={props.reviews} />
+            <MovieTabs movie={movie} reviews={reviews} />
           </div>
         </div>
       </section>

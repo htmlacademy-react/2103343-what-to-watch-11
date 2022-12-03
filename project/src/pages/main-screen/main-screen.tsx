@@ -1,23 +1,23 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
-import {FilmsType} from '../../types/types';
 import MovieList from '../../components/movie-list/movie-list';
 import { useAppSelector } from '../../hooks';
 import GenreList from '../../components/genres-list/genres-list';
-import { getCurrentGenre, getGenres, getSelectedFilms } from '../../utils';
+import { getCurrentGenre, getFilms, getGenres, getMovieListByGenre } from '../../utils';
 
 type MainScreenProps = {
-  movies: FilmsType[];
   title: string;
   genre: string;
   releaseYear: number;
 }
 
-export default function MainScreen(props: MainScreenProps): JSX.Element {
+export default function MainScreen({title, genre, releaseYear}: MainScreenProps): JSX.Element {
 
+  const movies = useAppSelector(getFilms);
   const currentGenre = useAppSelector(getCurrentGenre);
-  const selectedFilms = useAppSelector(getSelectedFilms(curentGenre));
-  const genres = getGenres(props.movies);
+  const selectedFilms = useAppSelector((state) => getMovieListByGenre(state.films, currentGenre));
+  const genres = getGenres(movies);
+
   return (
     <>
       <section className="film-card">
@@ -50,10 +50,10 @@ export default function MainScreen(props: MainScreenProps): JSX.Element {
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{props.title}</h2>
+              <h2 className="film-card__title">{title}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{props.genre}</span>
-                <span className="film-card__year">{props.releaseYear}</span>
+                <span className="film-card__genre">{genre}</span>
+                <span className="film-card__year">{releaseYear}</span>
               </p>
 
               <div className="film-card__buttons">

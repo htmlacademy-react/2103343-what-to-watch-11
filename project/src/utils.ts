@@ -18,8 +18,6 @@ export const getRatingCountToName = (rating: number) => {
   }
 };
 
-// AppSelector functions
-
 export const getMovieListByGenre = (films: FilmsType[], genre: string) => {
   if (genre === allGenresFilterName) {
     return films;
@@ -32,6 +30,9 @@ export const getGenres = (films: FilmsType[]): string[] => {
   return [allGenresFilterName, ...genres];
 };
 
-export const getCurrentGenre = (state: {genre: string}) => state.genre;
 
-export const getSelectedFilms = (state: {films: FilmsType[]}, currentGenre: string) => getMovieListByGenre(state.films, currentGenre);
+// AppSelector functions
+export const getCurrentGenre = (state: {genre: string}) => state.genre;
+export const getFilms = (state: {films: FilmsType[]}) => state.films;
+
+

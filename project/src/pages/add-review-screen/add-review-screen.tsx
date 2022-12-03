@@ -3,15 +3,15 @@ import { FilmsType } from '../../types/types';
 import { AppRoute } from '../../const';
 import AddReview from '../../components/add-review/add-review';
 import { useParams, Link, Navigate } from 'react-router-dom';
+import { useAppSelector } from '../../hooks';
+import { getFilms } from '../../utils';
 
-type AddReviewScreenPorps = {
-  movies: FilmsType[];
-}
+export default function AddReviewScreen(): JSX.Element {
 
-export default function AddReviewScreen(props: AddReviewScreenPorps): JSX.Element {
+  const movies = useAppSelector(getFilms);
   const params = useParams();
 
-  const movie = props.movies.find((elem: FilmsType) => elem.id.toString() === params.id);
+  const movie = movies.find((elem: FilmsType) => elem.id.toString() === params.id);
   if (!movie) {
     return (
       <Navigate replace to="/404" />
