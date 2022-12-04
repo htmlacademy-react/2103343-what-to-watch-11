@@ -2,7 +2,7 @@ import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { FilmsType } from '../../types/types';
-import { getFilms } from '../../utils';
+import { getFilms } from '../../selectors';
 
 export default function PlayerScreen(): JSX.Element {
 

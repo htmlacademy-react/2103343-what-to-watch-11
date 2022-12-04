@@ -6,6 +6,7 @@ type MovieListProps = {
 }
 
 export default function MovieList({movies}: MovieListProps): JSX.Element {
+
   return (
     <div className="catalog__films-list">
       {movies.map((movie: FilmsType) => <MovieCard movie={movie} key={movie.id} />)}

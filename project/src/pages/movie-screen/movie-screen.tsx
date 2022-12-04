@@ -6,7 +6,7 @@ import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import MovieList from '../../components/movie-list/movie-list';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import { useAppSelector } from '../../hooks';
-import { getFilms } from '../../utils';
+import { getFilms } from '../../selectors';
 
 type MovieScreenProps = {
   reviews: ReviewType[];

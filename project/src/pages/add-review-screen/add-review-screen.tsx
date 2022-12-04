@@ -4,7 +4,7 @@ import { AppRoute } from '../../const';
 import AddReview from '../../components/add-review/add-review';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
-import { getFilms } from '../../utils';
+import { getFilms } from '../../selectors';
 
 export default function AddReviewScreen(): JSX.Element {
 

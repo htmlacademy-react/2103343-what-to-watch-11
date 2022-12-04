@@ -8,3 +8,7 @@ export const changeGenre = createAction('films/changeGenre', (genre: string) => 
 export const setFilms = createAction('films/setFilms', (films: FilmsType[]) => ({
   payload: films,
 }));
+
+export const setIncrementFilmsInList = createAction('films/setIncrementFilmsInList');
+
+export const resetFilmsInList = createAction('films/resetFilmsInList');

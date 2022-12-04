@@ -11,7 +11,7 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { ReviewType} from '../../types/types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setFilms } from '../../store/action';
-import { getFilms } from '../../utils';
+import { getFilms } from '../../selectors';
 
 type AppScreenProps = {
   reviews: ReviewType[];
