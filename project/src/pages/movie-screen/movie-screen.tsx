@@ -24,8 +24,6 @@ export default function MovieScreen({reviews}: MovieScreenProps): JSX.Element {
     );
   }
 
-  const similarMovies = movies.slice(0, 4);
-
   return (
     <>
       <section className="film-card film-card--full" style={{background: `${movie.backgroundColor}`}}>
@@ -97,7 +95,7 @@ export default function MovieScreen({reviews}: MovieScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <MovieList movies={similarMovies} />
+          <MovieList />
 
         </section>
 

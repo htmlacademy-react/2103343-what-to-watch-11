@@ -30,7 +30,7 @@ export default function MyListScreen(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <MovieList movies={myMovies}/>
+        <MovieList />
 
       </section>
 

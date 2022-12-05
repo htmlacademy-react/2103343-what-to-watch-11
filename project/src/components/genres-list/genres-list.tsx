@@ -1,7 +1,7 @@
 import cn from 'classnames';
 import { useAppDispatch } from '../../hooks';
 import { Link } from 'react-router-dom';
-import { changeGenre, resetFilmsInList } from '../../store/action';
+import { setGenre } from '../../store/action';
 
 type GenreListProps = {
   currentGenre: string;
@@ -25,8 +25,7 @@ export default function GenreList({currentGenre, genres}:GenreListProps): JSX.El
             to="#"
             className="catalog__genres-link"
             onClick={() => {
-              dispatch(changeGenre(genre));
-              dispatch(resetFilmsInList());
+              dispatch(setGenre(genre));
             }}
           >
             {genre}

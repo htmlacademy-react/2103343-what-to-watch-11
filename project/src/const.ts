@@ -20,7 +20,7 @@ export enum TabValue {
   Reviews = 'reviews',
 }
 
-export const ALL_GENRES_FILTER_NAME = 'All Genres';
+export const GENRE_DEFAULT = 'All Genres';
 
 export const SHOW_MORE_COUNT = 4;
 

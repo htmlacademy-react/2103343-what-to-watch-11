@@ -1,12 +1,10 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
-import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useAppSelector } from '../../hooks';
 import GenreList from '../../components/genres-list/genres-list';
-import { getGenres, getMovieListByGenre } from '../../utils';
-import ShowMoreButton from '../../components/show-more-button/show-more-button';
-import { setIncrementFilmsInList } from '../../store/action';
-import { getCurrentGenre, getFilms, getIncrement } from '../../selectors';
+import { getGenres } from '../../utils';
+import { getCurrentGenre, getFilms } from '../../selectors';
 
 type MainScreenProps = {
   title: string;
@@ -17,14 +15,8 @@ type MainScreenProps = {
 export default function MainScreen({title, genre, releaseYear}: MainScreenProps): JSX.Element {
 
   const movies = useAppSelector(getFilms);
-  const renderedFilmsIncrement = useAppSelector(getIncrement);
   const currentGenre = useAppSelector(getCurrentGenre);
-
-  const selectedFilms = useAppSelector((state) => getMovieListByGenre(state.films, currentGenre));
-  const renderedFilms = useAppSelector((state) => getMovieListByGenre(state.films, currentGenre)).slice(0, renderedFilmsIncrement);
-
   const genres = getGenres(movies);
-  const dispatch = useAppDispatch();
 
   return (
     <>
@@ -90,12 +82,8 @@ export default function MainScreen({title, genre, releaseYear}: MainScreenProps)
 
           <GenreList currentGenre={currentGenre} genres={genres}/>
 
-          <MovieList movies={renderedFilms}/>
+          <MovieList />
 
-          <div className="catalog__more">
-            {selectedFilms.length > renderedFilms.length &&
-              <ShowMoreButton onClick={() => dispatch(setIncrementFilmsInList())}/>}
-          </div>
         </section>
 
         <Footer/>

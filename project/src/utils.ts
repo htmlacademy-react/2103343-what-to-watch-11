@@ -1,4 +1,4 @@
-import { ALL_GENRES_FILTER_NAME } from './const';
+import { GENRE_DEFAULT } from './const';
 import { FilmsType } from './types/types';
 
 export const getRatingCountToName = (rating: number) => {
@@ -18,14 +18,7 @@ export const getRatingCountToName = (rating: number) => {
   }
 };
 
-export const getMovieListByGenre = (films: FilmsType[], genre: string) => {
-  if (genre === ALL_GENRES_FILTER_NAME) {
-    return films;
-  }
-  return films.filter((film) => film.genre === genre);
-};
-
 export const getGenres = (films: FilmsType[]): string[] => {
   const genres = new Set(films.map((film) => film.genre));
-  return [ALL_GENRES_FILTER_NAME, ...genres];
+  return [GENRE_DEFAULT, ...genres];
 };
