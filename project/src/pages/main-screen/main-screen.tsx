@@ -3,7 +3,8 @@ import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
 import { useAppSelector } from '../../hooks';
 import GenreList from '../../components/genres-list/genres-list';
-import { getCurrentGenre, getFilms, getGenres, getMovieListByGenre } from '../../utils';
+import { getGenres } from '../../utils';
+import { getCurrentGenre, getFilms } from '../../selectors';
 
 type MainScreenProps = {
   title: string;
@@ -15,7 +16,6 @@ export default function MainScreen({title, genre, releaseYear}: MainScreenProps)
 
   const movies = useAppSelector(getFilms);
   const currentGenre = useAppSelector(getCurrentGenre);
-  const selectedFilms = useAppSelector((state) => getMovieListByGenre(state.films, currentGenre));
   const genres = getGenres(movies);
 
   return (
@@ -82,11 +82,8 @@ export default function MainScreen({title, genre, releaseYear}: MainScreenProps)
 
           <GenreList currentGenre={currentGenre} genres={genres}/>
 
-          <MovieList movies={selectedFilms}/>
+          <MovieList />
 
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
         </section>
 
         <Footer/>

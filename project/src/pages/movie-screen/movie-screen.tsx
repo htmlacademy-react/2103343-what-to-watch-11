@@ -6,7 +6,7 @@ import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import MovieList from '../../components/movie-list/movie-list';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import { useAppSelector } from '../../hooks';
-import { getFilms } from '../../utils';
+import { getFilms } from '../../selectors';
 
 type MovieScreenProps = {
   reviews: ReviewType[];
@@ -23,8 +23,6 @@ export default function MovieScreen({reviews}: MovieScreenProps): JSX.Element {
       <Navigate replace to="/404" />
     );
   }
-
-  const similarMovies = movies.slice(0, 4);
 
   return (
     <>
@@ -97,7 +95,7 @@ export default function MovieScreen({reviews}: MovieScreenProps): JSX.Element {
         <section className="catalog catalog--like-this">
           <h2 className="catalog__title">More like this</h2>
 
-          <MovieList movies={similarMovies} />
+          <MovieList />
 
         </section>
 

@@ -2,7 +2,7 @@ import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
 import { useAppSelector } from '../../hooks';
-import { getFilms } from '../../utils';
+import { getFilms } from '../../selectors';
 
 export default function MyListScreen(): JSX.Element {
 
@@ -30,7 +30,7 @@ export default function MyListScreen(): JSX.Element {
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <MovieList movies={myMovies}/>
+        <MovieList />
 
       </section>
 
