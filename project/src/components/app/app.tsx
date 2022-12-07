@@ -11,7 +11,8 @@ import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { ReviewType} from '../../types/types';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setFilms } from '../../store/action';
-import { getFilms } from '../../selectors';
+import { getFilms, setLoading } from '../../selectors';
+import LoadingScreen from '../loading/loading';
 
 type AppScreenProps = {
   reviews: ReviewType[];
@@ -22,11 +23,17 @@ type AppScreenProps = {
 
 function App(props: AppScreenProps): JSX.Element {
 
-  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
-
+  const isLoading = useAppSelector(setLoading);
   const movies = useAppSelector(getFilms);
   const dispatch = useAppDispatch();
+
   dispatch(setFilms(movies));
+
+  if (isLoading) {
+    return (
+      <LoadingScreen />
+    );
+  }
 
   return (
     <BrowserRouter>

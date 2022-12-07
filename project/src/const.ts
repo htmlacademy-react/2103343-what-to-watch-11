@@ -2,7 +2,7 @@ export enum AppRoute {
   Main = '/',
   Login = '/login',
   MyList = '/mylist',
-  Movie = '/movie',
+  Movie = '/films',
   AddReview = '/review',
   Player = '/player',
   NotFound = '/404'
@@ -21,12 +21,9 @@ export enum TabValue {
 }
 
 export enum APIRoute {
-  Movies = '/movie',
+  Movies = '/films',
 }
 
 export const GENRE_DEFAULT = 'All Genres';
 
 export const SHOW_MORE_COUNT = 4;
-
-export const TIMEOUT_ERROR = 2000;
-
