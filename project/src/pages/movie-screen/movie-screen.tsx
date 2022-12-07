@@ -1,6 +1,6 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
-import { FilmsType, ReviewType } from '../../types/types';
+import { FilmType, ReviewType } from '../../types/types';
 import { AppRoute } from '../../const';
 import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import MovieList from '../../components/movie-list/movie-list';
@@ -17,7 +17,7 @@ export default function MovieScreen({reviews}: MovieScreenProps): JSX.Element {
   const params = useParams();
   const navigate = useNavigate();
 
-  const movie = movies.find((elem: FilmsType) => elem.id.toString() === params.id);
+  const movie = movies.find((elem: FilmType) => elem.id.toString() === params.id);
   if (!movie) {
     return (
       <Navigate replace to="/404" />

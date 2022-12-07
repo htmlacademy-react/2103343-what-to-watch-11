@@ -1,8 +1,8 @@
-import { FilmsType } from '../../types/types';
+import { FilmType } from '../../types/types';
 import { getRatingCountToName } from '../../utils';
 
 type MovieOverviewProps = {
-  movie: FilmsType;
+  movie: FilmType;
 }
 
 export default function MovieOverview({movie}: MovieOverviewProps): JSX.Element {

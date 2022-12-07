@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { TabValue } from '../../const';
-import { FilmsType, ReviewType } from '../../types/types';
+import { FilmType, ReviewType } from '../../types/types';
 import MovieDetails from '../movie-details/movie-details';
 import MovieOverview from '../movie-overview/movie-overview';
 import MovieReviews from '../movie-reviews/movie-reviews';
 
 type MovieTabsProps = {
-  movie: FilmsType;
+  movie: FilmType;
   reviews: ReviewType[];
 }
 

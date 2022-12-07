@@ -1,11 +1,11 @@
-import {FilmsType} from '../../types/types';
+import {FilmType} from '../../types/types';
 import {AppRoute} from '../../const';
 import {Link} from 'react-router-dom';
 import { useState } from 'react';
 import VideoPlayer from '../video-player/video-player';
 
 type MovieCardProps = {
-  movie: FilmsType;
+  movie: FilmType;
 }
 
 export default function MovieCard ({movie}: MovieCardProps): JSX.Element {

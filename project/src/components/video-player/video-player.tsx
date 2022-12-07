@@ -1,8 +1,8 @@
-import {FilmsType} from '../../types/types';
+import {FilmType} from '../../types/types';
 import { useRef, useEffect } from 'react';
 
 type VideoPlayerProps = {
-  movie: FilmsType;
+  movie: FilmType;
   isPlaying: boolean;
 }
 

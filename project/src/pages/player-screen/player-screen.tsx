@@ -1,7 +1,7 @@
 import { useParams, useNavigate, Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks';
-import { FilmsType } from '../../types/types';
+import { FilmType } from '../../types/types';
 import { getFilms } from '../../selectors';
 
 export default function PlayerScreen(): JSX.Element {
@@ -10,7 +10,7 @@ export default function PlayerScreen(): JSX.Element {
   const params = useParams();
   const navigate = useNavigate();
 
-  const movie = movies.find((elem: FilmsType) => elem.id.toString() === params.id);
+  const movie = movies.find((elem: FilmType) => elem.id.toString() === params.id);
   if (!movie) {
     return (
       <Navigate replace to="/404" />

@@ -1,7 +1,7 @@
-import { FilmsType } from '../../types/types';
+import { FilmType } from '../../types/types';
 
 type MovieDetailsProps = {
-  movie: FilmsType;
+  movie: FilmType;
 }
 
 export default function MovieDetails ({movie}: MovieDetailsProps): JSX.Element {

@@ -22,6 +22,8 @@ export enum TabValue {
 
 export enum APIRoute {
   Movies = '/films',
+  Login = '/login',
+  Logout = '/logout',
 }
 
 export const GENRE_DEFAULT = 'All Genres';

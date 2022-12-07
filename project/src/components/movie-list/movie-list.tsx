@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { GENRE_DEFAULT, SHOW_MORE_COUNT } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getCurrentGenre, getFilms } from '../../selectors';
-import { FilmsType } from '../../types/types';
+import { FilmType } from '../../types/types';
 import MovieCard from '../movie-card/movie-card';
 
 export default function MovieList(): JSX.Element {
@@ -23,12 +23,13 @@ export default function MovieList(): JSX.Element {
   return (
     <>
       <div className="catalog__films-list">
-        {preparedMovies.slice(0, renderedMovies).map((movie: FilmsType) => <MovieCard movie={movie} key={movie.id} />)}
+        {preparedMovies.slice(0, renderedMovies).map((movie: FilmType) => <MovieCard movie={movie} key={movie.id} />)}
       </div>
       {renderedMovies < preparedMovies.length ?
         <div className="catalog__more">
           <button className="catalog__button" type="button" onClick={showMoreHandler}>Show more</button>
-        </div> : null}
+        </div>
+        : null}
     </>
   );
 }

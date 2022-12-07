@@ -1,5 +1,5 @@
 import Logo from '../../components/logo/logo';
-import { FilmsType } from '../../types/types';
+import { FilmType } from '../../types/types';
 import { AppRoute } from '../../const';
 import AddReview from '../../components/add-review/add-review';
 import { useParams, Link, Navigate } from 'react-router-dom';
@@ -11,7 +11,7 @@ export default function AddReviewScreen(): JSX.Element {
   const movies = useAppSelector(getFilms);
   const params = useParams();
 
-  const movie = movies.find((elem: FilmsType) => elem.id.toString() === params.id);
+  const movie = movies.find((elem: FilmType) => elem.id.toString() === params.id);
   if (!movie) {
     return (
       <Navigate replace to="/404" />
