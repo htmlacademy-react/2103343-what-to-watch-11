@@ -10,7 +10,9 @@ export default function MovieList(): JSX.Element {
   const genge = useAppSelector(getCurrentGenre);
   const isAllGenre = genge === GENRE_DEFAULT;
 
-  const preparedMovies = isAllGenre ? movies : movies.filter((movie) => movie.genre === genge);
+  const preparedMovies = isAllGenre
+    ? movies
+    : movies.filter((movie) => movie.genre === genge);
 
   const [renderedMovies, setRenderedMovies] = useState<number>(Math.min(preparedMovies.length, SHOW_MORE_COUNT));
 
@@ -23,11 +25,11 @@ export default function MovieList(): JSX.Element {
       <div className="catalog__films-list">
         {preparedMovies.slice(0, renderedMovies).map((movie: FilmsType) => <MovieCard movie={movie} key={movie.id} />)}
       </div>
-      {renderedMovies < preparedMovies.length ?
-        <div className="catalog__more">
+      {renderedMovies < preparedMovies.length
+      ? <div className="catalog__more">
           <button className="catalog__button" type="button" onClick={showMoreHandler}>Show more</button>
         </div>
-        : null}
+      : null}
     </>
   );
 }

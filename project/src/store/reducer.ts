@@ -7,6 +7,8 @@ import { setGenre, setFilms } from './action';
 const initialState = {
   genre: GENRE_DEFAULT,
   films: filmsMock,
+  isFilmsDataLoading: boolean;
+  error: string | null;
 };
 
 const reducer = createReducer(initialState, (builder) => {

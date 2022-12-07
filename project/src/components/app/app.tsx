@@ -21,6 +21,9 @@ type AppScreenProps = {
 }
 
 function App(props: AppScreenProps): JSX.Element {
+
+  const isFilmsDataLoading = useAppSelector((state) => state.isFilmsDataLoading);
+
   const movies = useAppSelector(getFilms);
   const dispatch = useAppDispatch();
   dispatch(setFilms(movies));

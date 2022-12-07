@@ -20,7 +20,13 @@ export enum TabValue {
   Reviews = 'reviews',
 }
 
+export enum APIRoute {
+  Movies = '/movie',
+}
+
 export const GENRE_DEFAULT = 'All Genres';
 
 export const SHOW_MORE_COUNT = 4;
+
+export const TIMEOUT_ERROR = 2000;
 

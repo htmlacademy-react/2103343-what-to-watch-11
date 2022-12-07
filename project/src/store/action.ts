@@ -9,3 +9,8 @@ export const setFilms = createAction('films/setFilms', (films: FilmsType[]) => (
   payload: films,
 }));
 
+export const loadFilms = createAction<FilmsType>('data/loadFilms');
+
+export const setFilmsDataLoadingStatus = createAction<boolean>('data/setFilmsDataLoadingStatus');
+
+export const setError = createAction<string | null>('app/setError');
