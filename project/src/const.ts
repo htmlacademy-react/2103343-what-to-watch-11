@@ -24,8 +24,11 @@ export enum APIRoute {
   Movies = '/films',
   Login = '/login',
   Logout = '/logout',
+  Reviews = '/comments',
 }
 
 export const GENRE_DEFAULT = 'All Genres';
 
 export const SHOW_MORE_COUNT = 4;
+
+export const SIMILAR_COUNT = 4;

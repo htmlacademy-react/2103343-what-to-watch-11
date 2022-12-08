@@ -9,17 +9,14 @@ import AddReviewScreen from '../../pages/add-review-screen/add-review-screen';
 import PrivateRoute from '../private-route/private-route';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
-import { ReviewType} from '../../types/types';
-import { useAppDispatch, useAppSelector } from '../../hooks';
-import { setFilms } from '../../store/action';
-import { getAuthorization, getFilms, getLoading } from '../../selectors';
+import { useAppSelector } from '../../hooks';
+import { getAuthorization, getLoading } from '../../selectors';
 import LoadingScreen from '../loading/loading';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
-import { useEffect } from 'react';
+
 
 type AppScreenProps = {
-  reviews: ReviewType[];
   title: string;
   genre: string;
   releaseYear: number;
@@ -28,12 +25,6 @@ type AppScreenProps = {
 function App(props: AppScreenProps): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorization);
   const isLoading = useAppSelector(getLoading);
-  const movies = useAppSelector(getFilms);
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(setFilms(movies));
-  }, [movies, dispatch]);
 
   if (authorizationStatus === AuthorizationStatus.Unknown || isLoading) {
     return (
@@ -63,7 +54,7 @@ function App(props: AppScreenProps): JSX.Element {
           />
           <Route
             path={`${AppRoute.Movie}/:id`}
-            element={<MovieScreen reviews={props.reviews}/>}
+            element={<MovieScreen />}
           />
           <Route
             path={`${AppRoute.Movie}/:id${AppRoute.AddReview}`}

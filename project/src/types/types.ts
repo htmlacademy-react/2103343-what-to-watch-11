@@ -31,7 +31,14 @@ export type ReviewType = {
   };
 }
 
+export type Reviews = ReviewType[];
+
 export type AddReviewType = {
+  rating: number;
+  comment: string;
+}
+
+export type ReviewFormData = {
   rating: number;
   comment: string;
 }
