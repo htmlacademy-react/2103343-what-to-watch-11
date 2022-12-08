@@ -17,7 +17,7 @@ const initialState: InitialState = {
   genre: GENRE_DEFAULT,
   films: {
     data: [],
-  isLoading: false,
+    isLoading: false,
   },
   authorizationStatus: AuthorizationStatus.Unknown,
 };
