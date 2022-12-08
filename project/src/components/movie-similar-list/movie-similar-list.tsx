@@ -9,7 +9,7 @@ export default function MovieSimilarList ({ films }: FilmsListProps): JSX.Elemen
 
   return (
     <div className="catalog__films-list" >
-      {films.map((film) => <MovieCard key={film.id} movie={film} />)}
+      {films.map((film) => <MovieCard key={film.id} film={film} />)}
     </div>
   );
 }

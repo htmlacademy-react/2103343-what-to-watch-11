@@ -98,7 +98,7 @@ export default function MovieScreen(): JSX.Element {
               />
             </div>
 
-            <MovieTabs movie={film} reviews={reviews} />
+            <MovieTabs film={film} reviews={reviews} />
 
           </div>
         </div>

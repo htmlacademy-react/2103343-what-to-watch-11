@@ -7,23 +7,23 @@ import MovieOverview from '../movie-overview/movie-overview';
 import MovieReviews from '../movie-reviews/movie-reviews';
 
 type MovieTabsProps = {
-  movie: FilmType;
+  film: FilmType;
   reviews: ReviewType[];
 }
 
-export default function MovieTabs ({movie, reviews}: MovieTabsProps): JSX.Element {
+export default function MovieTabs ({film, reviews}: MovieTabsProps): JSX.Element {
   const [activeTab, setActiveTab] = useState<string>(TabValue.Overview);
 
   const renderTab = () => {
     switch(activeTab) {
       case TabValue.Overview:
-        return <MovieOverview movie={movie} />;
+        return <MovieOverview film={film} />;
       case TabValue.Details:
-        return <MovieDetails movie={movie} />;
+        return <MovieDetails film={film} />;
       case TabValue.Reviews:
         return <MovieReviews reviews={reviews} />;
       default :
-        return <MovieOverview movie={movie} />;
+        return <MovieOverview film={film} />;
     }
   };
 
