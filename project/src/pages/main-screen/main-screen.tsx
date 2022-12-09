@@ -1,11 +1,13 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenreList from '../../components/genres-list/genres-list';
 import { getGenres } from '../../utils';
 import { getCurrentGenre, getFilms } from '../../selectors';
 import UserBlock from '../../components/user-block/user-block';
+import { useEffect } from 'react';
+import { fetchFilmsAction } from '../../store/api-actions';
 
 type MainScreenProps = {
   title: string;
@@ -18,6 +20,13 @@ export default function MainScreen({title, genre, releaseYear}: MainScreenProps)
   const films = useAppSelector(getFilms);
   const currentGenre = useAppSelector(getCurrentGenre);
   const genres = getGenres(films);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (films.length <= 0) {
+      dispatch(fetchFilmsAction());
+    }
+  }, [films, dispatch]);
 
   return (
     <>
