@@ -10,10 +10,10 @@ type InitialState = {
     data?: FilmType;
     isLoading: boolean;
   };
-  films: Films; //{
-    //data: Films;
+  films: {
+    data: Films;
     isLoading: boolean;
-  //};
+  };
   similarFilms: Films;
   filmReviews: Reviews;
   isReviewFormDisabled: boolean;
@@ -22,10 +22,10 @@ type InitialState = {
 
 const initialState: InitialState = {
   genre: GENRE_DEFAULT,
-  films: [], //{
-    //data: [],
+  films: {
+    data: [],
     isLoading: false,
-  //},
+  },
   film: {
     isLoading: false,
   },
@@ -41,7 +41,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.genre = action.payload;
     })
     .addCase(loadFilms, (state, action) => {
-      state.films = action.payload;
+      state.films.data = action.payload;
     })
     .addCase(loadFilm, (state, action) => {
       state.film.data = action.payload;
@@ -53,7 +53,7 @@ const reducer = createReducer(initialState, (builder) => {
       state.similarFilms = action.payload;
     })
     .addCase(setLoadingStatus, (state, action) => {
-      state.isLoading = action.payload;
+      state.films.isLoading = action.payload;
     })
     .addCase(setFilmLoadingStatus, (state, action) => {
       state.film.isLoading = action.payload;

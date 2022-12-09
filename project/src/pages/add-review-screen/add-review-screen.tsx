@@ -8,20 +8,20 @@ import { getFilms } from '../../selectors';
 
 export default function AddReviewScreen(): JSX.Element {
 
-  const movies = useAppSelector(getFilms);
+  const films = useAppSelector(getFilms);
   const params = useParams();
 
-  const movie = movies.find((elem: FilmType) => elem.id.toString() === params.id);
-  if (!movie) {
+  const film = films.data.find((elem: FilmType) => elem.id.toString() === params.id);
+  if (!film) {
     return (
       <Navigate replace to="/404" />
     );
   }
   return (
-    <section className="film-card film-card--full" style={{background: `${movie.backgroundColor}`}}>
+    <section className="film-card film-card--full" style={{background: `${film.backgroundColor}`}}>
       <div className="film-card__header">
         <div className="film-card__bg">
-          <img src={movie.backgroundImage} alt={movie.name}/>
+          <img src={film.backgroundImage} alt={film.name}/>
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -33,7 +33,7 @@ export default function AddReviewScreen(): JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to={`${AppRoute.Movie}/${movie.id}`} className="breadcrumbs__link">{movie.name}</Link>
+                <Link to={`${AppRoute.Movie}/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
                 <a className="breadcrumbs__link">Add review</a>
@@ -54,7 +54,7 @@ export default function AddReviewScreen(): JSX.Element {
         </header>
 
         <div className="film-card__poster film-card__poster--small">
-          <img src={movie.posterImage} alt={`${movie.name} poster`} width="218"
+          <img src={film.posterImage} alt={`${film.name} poster`} width="218"
             height="327"
           />
         </div>

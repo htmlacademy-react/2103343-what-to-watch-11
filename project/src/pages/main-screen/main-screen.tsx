@@ -15,9 +15,9 @@ type MainScreenProps = {
 
 export default function MainScreen({title, genre, releaseYear}: MainScreenProps): JSX.Element {
 
-  const movies = useAppSelector(getFilms);
+  const films = useAppSelector(getFilms);
   const currentGenre = useAppSelector(getCurrentGenre);
-  const genres = getGenres(movies);
+  const genres = getGenres(films.data);
 
   return (
     <>
