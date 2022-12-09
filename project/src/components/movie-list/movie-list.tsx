@@ -11,8 +11,8 @@ export default function MovieList(): JSX.Element {
   const isAllGenre = genge === GENRE_DEFAULT;
 
   const preparedFilms = isAllGenre
-    ? films.data
-    : films.data.filter((film) => film.genre === genge);
+    ? films
+    : films.filter((film) => film.genre === genge);
 
   const [renderedFilms, setRenderedFilms] = useState<number>(Math.min(preparedFilms.length, SHOW_MORE_COUNT));
 

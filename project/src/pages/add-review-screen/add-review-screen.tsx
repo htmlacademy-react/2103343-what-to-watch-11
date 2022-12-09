@@ -11,7 +11,7 @@ export default function AddReviewScreen(): JSX.Element {
   const films = useAppSelector(getFilms);
   const params = useParams();
 
-  const film = films.data.find((elem: FilmType) => elem.id.toString() === params.id);
+  const film = films.find((elem: FilmType) => elem.id.toString() === params.id);
   if (!film) {
     return (
       <Navigate replace to="/404" />

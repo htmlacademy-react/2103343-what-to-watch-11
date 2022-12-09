@@ -17,7 +17,7 @@ export default function MainScreen({title, genre, releaseYear}: MainScreenProps)
 
   const films = useAppSelector(getFilms);
   const currentGenre = useAppSelector(getCurrentGenre);
-  const genres = getGenres(films.data);
+  const genres = getGenres(films);
 
   return (
     <>

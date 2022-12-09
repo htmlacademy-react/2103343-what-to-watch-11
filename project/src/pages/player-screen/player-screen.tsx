@@ -10,7 +10,7 @@ export default function PlayerScreen(): JSX.Element {
   const params = useParams();
   const navigate = useNavigate();
 
-  const film = films.data.find((elem: FilmType) => elem.id.toString() === params.id);
+  const film = films.find((elem: FilmType) => elem.id.toString() === params.id);
   if (!film) {
     return (
       <Navigate replace to="/404" />
