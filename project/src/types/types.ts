@@ -1,4 +1,4 @@
-export type FilmsType = {
+export type FilmType = {
   id: number;
   name: string;
   posterImage: string;
@@ -18,6 +18,8 @@ export type FilmsType = {
   isFavorite: boolean;
 };
 
+export type Films = FilmType[];
+
 export type ReviewType = {
   comment: string;
   date: string;
@@ -29,7 +31,14 @@ export type ReviewType = {
   };
 }
 
+export type Reviews = ReviewType[];
+
 export type AddReviewType = {
+  rating: number;
+  comment: string;
+}
+
+export type ReviewFormData = {
   rating: number;
   comment: string;
 }

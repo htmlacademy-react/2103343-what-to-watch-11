@@ -2,28 +2,30 @@ import { useEffect, useState } from 'react';
 import { GENRE_DEFAULT, SHOW_MORE_COUNT } from '../../const';
 import { useAppSelector } from '../../hooks';
 import { getCurrentGenre, getFilms } from '../../selectors';
-import { FilmsType } from '../../types/types';
+import { FilmType } from '../../types/types';
 import MovieCard from '../movie-card/movie-card';
 
 export default function MovieList(): JSX.Element {
-  const movies = useAppSelector(getFilms);
+  const films = useAppSelector(getFilms);
   const genge = useAppSelector(getCurrentGenre);
   const isAllGenre = genge === GENRE_DEFAULT;
 
-  const preparedMovies = isAllGenre ? movies : movies.filter((movie) => movie.genre === genge);
+  const preparedFilms = isAllGenre
+    ? films
+    : films.filter((film) => film.genre === genge);
 
-  const [renderedMovies, setRenderedMovies] = useState<number>(Math.min(preparedMovies.length, SHOW_MORE_COUNT));
+  const [renderedFilms, setRenderedFilms] = useState<number>(Math.min(preparedFilms.length, SHOW_MORE_COUNT));
 
-  const showMoreHandler = () => setRenderedMovies(Math.min(preparedMovies.length, renderedMovies + SHOW_MORE_COUNT));
+  const showMoreHandler = () => setRenderedFilms(Math.min(preparedFilms.length, renderedFilms + SHOW_MORE_COUNT));
 
-  useEffect(() => setRenderedMovies(Math.min(preparedMovies.length, SHOW_MORE_COUNT)), [genge]);
+  useEffect(() => setRenderedFilms(Math.min(preparedFilms.length, SHOW_MORE_COUNT)), [genge]);
 
   return (
     <>
       <div className="catalog__films-list">
-        {preparedMovies.slice(0, renderedMovies).map((movie: FilmsType) => <MovieCard movie={movie} key={movie.id} />)}
+        {preparedFilms.slice(0, renderedFilms).map((film: FilmType) => <MovieCard film={film} key={film.id} />)}
       </div>
-      {renderedMovies < preparedMovies.length ?
+      {renderedFilms < preparedFilms.length ?
         <div className="catalog__more">
           <button className="catalog__button" type="button" onClick={showMoreHandler}>Show more</button>
         </div>

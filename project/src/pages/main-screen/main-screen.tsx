@@ -1,10 +1,13 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
-import { useAppSelector } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenreList from '../../components/genres-list/genres-list';
 import { getGenres } from '../../utils';
 import { getCurrentGenre, getFilms } from '../../selectors';
+import UserBlock from '../../components/user-block/user-block';
+import { useEffect } from 'react';
+import { fetchFilmsAction } from '../../store/api-actions';
 
 type MainScreenProps = {
   title: string;
@@ -14,9 +17,16 @@ type MainScreenProps = {
 
 export default function MainScreen({title, genre, releaseYear}: MainScreenProps): JSX.Element {
 
-  const movies = useAppSelector(getFilms);
+  const films = useAppSelector(getFilms);
   const currentGenre = useAppSelector(getCurrentGenre);
-  const genres = getGenres(movies);
+  const genres = getGenres(films);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    if (films.length <= 0) {
+      dispatch(fetchFilmsAction());
+    }
+  }, [films, dispatch]);
 
   return (
     <>
@@ -30,17 +40,8 @@ export default function MainScreen({title, genre, releaseYear}: MainScreenProps)
         <header className="page-header film-card__head">
 
           <Logo/>
+          <UserBlock />
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
         </header>
 
         <div className="film-card__wrap">

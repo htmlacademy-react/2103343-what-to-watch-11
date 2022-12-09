@@ -1,5 +1,5 @@
 import { GENRE_DEFAULT } from './const';
-import { FilmsType } from './types/types';
+import { FilmType } from './types/types';
 
 export const getRatingCountToName = (rating: number) => {
   if (rating > 0 && rating < 3) {
@@ -18,7 +18,7 @@ export const getRatingCountToName = (rating: number) => {
   }
 };
 
-export const getGenres = (films: FilmsType[]): string[] => {
+export const getGenres = (films: FilmType[]): string[] => {
   const genres = new Set(films.map((film) => film.genre));
   return [GENRE_DEFAULT, ...genres];
 };
