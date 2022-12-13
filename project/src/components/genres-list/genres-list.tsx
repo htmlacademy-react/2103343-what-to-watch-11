@@ -19,6 +19,7 @@ export default function GenreList(): JSX.Element {
       {genres.map((genre) => (
         <li
           key={genre}
+          data-testid="genre"
           className={cn(
             'catalog__genres-item',
             { 'catalog__genres-item--active': genre === currentGenre }

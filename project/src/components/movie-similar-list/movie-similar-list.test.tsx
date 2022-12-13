@@ -1,20 +1,20 @@
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
 import HistoryRouter from '../history-route/history-route';
-import { reviewsMock } from '../../mocks/moks';
-import MovieReviews from './movie-reviews';
+import { filmsMock } from '../../mocks/moks';
+import MovieSimilarList from './movie-similar-list';
 
 const history = createMemoryHistory();
-const reviews = reviewsMock;
-describe('Component: FilmTabReviews', () => {
+const films = filmsMock;
+describe('Component: FilmsList', () => {
   it('should render correctly', () => {
 
     render(
       <HistoryRouter history={history}>
-        <MovieReviews reviews={reviews} />
+        <MovieSimilarList films={films} />
       </HistoryRouter>
     );
 
-    expect(screen.getAllByTestId('review').length).toBe(reviews.length);
+    expect(screen.getAllByTestId('film').length).toBe(films.length);
   });
 });
