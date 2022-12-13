@@ -6,7 +6,7 @@ type MovieReviewProps = {
 
 export default function MovieReview ({review}: MovieReviewProps): JSX.Element {
   return (
-    <div className="review" key={review.id}>
+    <div className="review" key={review.id} data-testid="review">
       <blockquote className="review__quote">
         <p className="review__text">{review.comment}</p>
 

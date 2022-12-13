@@ -16,7 +16,7 @@ export default function MovieCard ({film}: MovieCardProps): JSX.Element {
   };
 
   return (
-    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleFilmCardMouseOver} onMouseOut={() => setActiveCard(false)}>
+    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleFilmCardMouseOver} onMouseOut={() => setActiveCard(false)} data-testid="film">
       <div className="small-film-card__image">
         {
           activeCard

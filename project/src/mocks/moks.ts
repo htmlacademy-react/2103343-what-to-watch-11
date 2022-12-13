@@ -94,7 +94,7 @@ export const filmsMock = [
     }
 ];
 
-export const reviewMock = [
+export const reviewsMock = [
     {
       comment: 'Discerning travellers and Wes Anderson fans will luxuriate in the glorious Mittel-European kitsch of one of the director`s funniest and most exquisitely designed movies in years.',
       date: '2022-10-31T20:30:29.573Z',
