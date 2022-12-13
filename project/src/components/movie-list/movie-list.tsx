@@ -1,14 +1,23 @@
 import { useEffect, useState } from 'react';
 import { GENRE_DEFAULT, SHOW_MORE_COUNT } from '../../const';
-import { useAppSelector } from '../../hooks';
-import { getCurrentGenre, getFilms } from '../../selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { fetchFilmsAction } from '../../store/api-actions';
+import { getFilms } from '../../store/films-data/selectors';
+import { getGenre } from '../../store/films-process/selectors';
 import { FilmType } from '../../types/types';
 import MovieCard from '../movie-card/movie-card';
 
 export default function MovieList(): JSX.Element {
+  const dispatch = useAppDispatch();
   const films = useAppSelector(getFilms);
-  const genge = useAppSelector(getCurrentGenre);
+  const genge = useAppSelector(getGenre);
   const isAllGenre = genge === GENRE_DEFAULT;
+
+  useEffect(() => {
+    if (films.length <= 0) {
+      dispatch(fetchFilmsAction());
+    }
+  }, [films, dispatch]);
 
   const preparedFilms = isAllGenre
     ? films

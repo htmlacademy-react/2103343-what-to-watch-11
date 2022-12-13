@@ -1,15 +1,18 @@
 import cn from 'classnames';
-import { useAppDispatch } from '../../hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import { Link } from 'react-router-dom';
-import { setGenre } from '../../store/action';
+import { useMemo } from 'react';
+import { getGenres } from '../../utils';
+import { getGenre } from '../../store/films-process/selectors';
+import { getFilms } from '../../store/films-data/selectors';
+import { setGenre } from '../../store/films-process/films-process';
 
-type GenreListProps = {
-  currentGenre: string;
-  genres: string[];
-}
+export default function GenreList(): JSX.Element {
 
-export default function GenreList({currentGenre, genres}:GenreListProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const films = useAppSelector(getFilms);
+  const currentGenre = useAppSelector(getGenre);
+  const genres = useMemo(() => getGenres(films), [films]);
 
   return (
     <ul className="catalog__genres-list">

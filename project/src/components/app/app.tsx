@@ -1,7 +1,7 @@
 import MainScreen from '../../pages/main-screen/main-screen';
 import {Route, Routes} from 'react-router-dom';
 import {HelmetProvider} from 'react-helmet-async';
-import {AuthorizationStatus, AppRoute} from '../../const';
+import { AppRoute} from '../../const';
 import SignInScreen from '../../pages/sign-in-screen/sign-in-screen';
 import MyListScreen from '../../pages/my-list-screen/my-list-screen';
 import MovieScreen from '../../pages/movie-screen/movie-screen';
@@ -10,23 +10,18 @@ import PrivateRoute from '../private-route/private-route';
 import PlayerScreen from '../../pages/player-screen/player-screen';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen';
 import { useAppSelector } from '../../hooks';
-import { getAuthorization, getLoading } from '../../selectors';
 import LoadingScreen from '../loading/loading';
 import browserHistory from '../../browser-history';
 import HistoryRouter from '../history-route/history-route';
+import { getFilmsStatus } from '../../store/films-data/selectors';
+import { getAuthCheckedStatus, getAuthorizationStatus } from '../../store/user-process/selectors';
 
+function App(): JSX.Element {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const isFilmsLoading = useAppSelector(getFilmsStatus);
+  const isAuthChecked = useAppSelector(getAuthCheckedStatus);
 
-type AppScreenProps = {
-  title: string;
-  genre: string;
-  releaseYear: number;
-}
-
-function App(props: AppScreenProps): JSX.Element {
-  const authorizationStatus = useAppSelector(getAuthorization);
-  const isLoading = useAppSelector(getLoading);
-
-  if (authorizationStatus === AuthorizationStatus.Unknown || isLoading) {
+  if (!isAuthChecked || isFilmsLoading) {
     return (
       <LoadingScreen />
     );
@@ -38,7 +33,7 @@ function App(props: AppScreenProps): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainScreen {...props}/>}
+            element={<MainScreen />}
           />
           <Route
             path={AppRoute.Login}

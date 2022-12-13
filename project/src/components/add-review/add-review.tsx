@@ -2,13 +2,14 @@ import { useState, SyntheticEvent, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { APIRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getFilm, getReviewFormStatus } from '../../selectors';
-import { setReviewFormDisabled } from '../../store/action';
 import { commentAction } from '../../store/api-actions';
+import { setReviewFormDisabled } from '../../store/films-data/films-data';
+import { getFilm, getReviewFormStatus } from '../../store/films-data/selectors';
 import { AddReviewType } from '../../types/types';
 import RatingStars from '../rating-stars/rating-stars';
 
 export default function AddReview (): JSX.Element{
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const film = useAppSelector(getFilm);

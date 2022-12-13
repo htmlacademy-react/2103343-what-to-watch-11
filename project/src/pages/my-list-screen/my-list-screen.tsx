@@ -1,12 +1,26 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
-import MovieList from '../../components/movie-list/movie-list';
-import { useAppSelector } from '../../hooks';
-import { getFilms } from '../../selectors';
+import { getFavoriteFilms, getFavoriteFilmsStatus } from '../../store/films-data/selectors';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { useEffect } from 'react';
+import { fetchFavoriteFilmsAction } from '../../store/api-actions';
+import LoadingScreen from '../../components/loading/loading';
+import UserBlock from '../../components/user-block/user-block';
+import MovieSimilarList from '../../components/movie-similar-list/movie-similar-list';
 
 export default function MyListScreen(): JSX.Element {
 
-  const myMovies = useAppSelector(getFilms);
+  const dispatch = useAppDispatch();
+  const films = useAppSelector(getFavoriteFilms);
+  const isFavoriteLoading = useAppSelector(getFavoriteFilmsStatus);
+
+  useEffect(() => {
+    dispatch(fetchFavoriteFilmsAction());
+  }, [dispatch]);
+
+  if (isFavoriteLoading) {
+    return <LoadingScreen />;
+  }
 
   return (
     <div className="user-page">
@@ -14,23 +28,16 @@ export default function MyListScreen(): JSX.Element {
 
         <Logo/>
 
-        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{myMovies.length}</span></h1>
-        <ul className="user-block">
-          <li className="user-block__item">
-            <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-            </div>
-          </li>
-          <li className="user-block__item">
-            <a className="user-block__link">Sign out</a>
-          </li>
-        </ul>
+        <h1 className="page-title user-page__title">My list <span className="user-page__film-count">{films.length}</span></h1>
+
+        <UserBlock />
+
       </header>
 
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-        <MovieList />
+        <MovieSimilarList films={films} />
 
       </section>
 

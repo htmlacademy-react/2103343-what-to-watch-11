@@ -25,7 +25,16 @@ export enum APIRoute {
   Login = '/login',
   Logout = '/logout',
   Reviews = '/comments',
+  Promo = '/promo',
+  Favorite = '/favorite',
 }
+
+export enum NameSpace {
+  Data = 'DATA',
+  User = 'USER',
+  Films = 'FILMS',
+}
+
 
 export const GENRE_DEFAULT = 'All Genres';
 
