@@ -5,17 +5,31 @@ import { FilmType } from '../../types/types';
 import { commentAction, fetchFavoriteFilmsAction, fetchFilmAction, fetchFilmReviewsAction, fetchFilmsAction, fetchPromoFilmAction, fetchSimilarFilmsAction } from '../api-actions';
 
 const initialState: FilmsData = {
-  films: [],
-  filmReviews: [],
-  similarFilms: [],
+  films: {
+    data: [],
+    isLoading: false,
+  },
+
+  filmReviews:{
+    data: [],
+    isLoading: false,
+  },
+
+  similarFilms:{
+    data: [],
+    isLoading: false,
+  },
+
   promoFilm: {} as FilmType,
-  favoriteFilms: [],
-  isFilmsLoading: false,
+
   isFilmLoading: false,
-  isFilmReviewsLoading: false,
-  isSimilarFilmsLoading: false,
+
+  favoriteFilms:{
+    data: [],
+    isLoading: false,
+  },
+
   isReviewFormDisabled: false,
-  isFavoriteFilmsLoading: false,
 };
 
 export const filmsData = createSlice({
@@ -29,11 +43,11 @@ export const filmsData = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchFilmsAction.pending, (state) => {
-        state.isFilmsLoading = true;
+        state.films.isLoading = true;
       })
       .addCase(fetchFilmsAction.fulfilled, (state, action) => {
-        state.films = action.payload;
-        state.isFilmsLoading = false;
+        state.films.data = action.payload;
+        state.films.isLoading = false;
       })
       .addCase(fetchFilmAction.pending, (state) => {
         state.isFilmLoading = true;
@@ -43,28 +57,28 @@ export const filmsData = createSlice({
         state.isFilmLoading = false;
       })
       .addCase(fetchFilmReviewsAction.pending, (state) => {
-        state.isFilmReviewsLoading = true;
+        state.filmReviews.isLoading = true;
       })
       .addCase(fetchFilmReviewsAction.fulfilled, (state, action) => {
-        state.filmReviews = action.payload;
-        state.isFilmReviewsLoading = false;
+        state.filmReviews.data = action.payload;
+        state.filmReviews.isLoading = false;
       })
       .addCase(fetchPromoFilmAction.fulfilled, (state, action) => {
         state.promoFilm = action.payload;
       })
       .addCase(fetchSimilarFilmsAction.pending, (state) => {
-        state.isSimilarFilmsLoading = true;
+        state.similarFilms.isLoading = true;
       })
       .addCase(fetchSimilarFilmsAction.fulfilled, (state, action) => {
-        state.similarFilms = action.payload;
-        state.isSimilarFilmsLoading = false;
+        state.similarFilms.data = action.payload;
+        state.similarFilms.isLoading = false;
       })
       .addCase(fetchFavoriteFilmsAction.pending, (state) => {
-        state.isFavoriteFilmsLoading = true;
+        state.favoriteFilms.isLoading = true;
       })
       .addCase(fetchFavoriteFilmsAction.fulfilled, (state, action) => {
-        state.favoriteFilms = action.payload;
-        state.isFavoriteFilmsLoading = false;
+        state.favoriteFilms.data = action.payload;
+        state.favoriteFilms.isLoading = false;
       })
       .addCase(commentAction.pending, (state) => {
         state.isReviewFormDisabled = true;

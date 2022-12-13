@@ -11,17 +11,31 @@ export type UserProcess = {
 };
 
 export type FilmsData = {
-    films: Films;
+    films: {
+        data: Films;
+        isLoading: boolean;
+    }
+
     film?: FilmType;
-    filmReviews: Reviews;
-    promoFilm: FilmType;
-    similarFilms: Films;
-    favoriteFilms: Films;
-    isFilmsLoading: boolean;
     isFilmLoading: boolean;
-    isFilmReviewsLoading: boolean;
-    isSimilarFilmsLoading: boolean;
-    isFavoriteFilmsLoading: boolean;
+
+    filmReviews: {
+        data: Reviews;
+        isLoading: boolean;
+    }
+
+    promoFilm: FilmType;
+
+    similarFilms: {
+        data: Films;
+        isLoading: boolean;
+    }
+
+    favoriteFilms: {
+        data: Films;
+        isLoading: boolean;
+    }
+
     isReviewFormDisabled: boolean;
 };
 
