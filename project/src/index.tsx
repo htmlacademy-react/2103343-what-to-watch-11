@@ -11,21 +11,13 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-const featuredMovie = {
-  title: 'The Grand Budapest Hotel',
-  genre: 'Drama',
-  releaseYear: 2014
-};
-
 store.dispatch(checkAuthAction());
 
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <ToastContainer />
-      <App
-        {...featuredMovie}
-      />
+      <App />
     </Provider>
   </React.StrictMode>,
 );

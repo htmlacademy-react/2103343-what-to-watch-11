@@ -3,36 +3,35 @@ import Footer from '../../components/footer/footer';
 import MovieList from '../../components/movie-list/movie-list';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import GenreList from '../../components/genres-list/genres-list';
-import { getGenres } from '../../utils';
-import { getCurrentGenre, getFilms } from '../../selectors';
 import UserBlock from '../../components/user-block/user-block';
 import { useEffect } from 'react';
-import { fetchFilmsAction } from '../../store/api-actions';
+import { fetchFavoriteFilmsAction, fetchPromoFilmAction } from '../../store/api-actions';
+import { useNavigate } from 'react-router-dom';
+import { getPromoFilm } from '../../store/films-data/selectors';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
 
-type MainScreenProps = {
-  title: string;
-  genre: string;
-  releaseYear: number;
-}
+export default function MainScreen(): JSX.Element {
 
-export default function MainScreen({title, genre, releaseYear}: MainScreenProps): JSX.Element {
-
-  const films = useAppSelector(getFilms);
-  const currentGenre = useAppSelector(getCurrentGenre);
-  const genres = getGenres(films);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
-    if (films.length <= 0) {
-      dispatch(fetchFilmsAction());
+    dispatch(fetchPromoFilmAction());
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(fetchFavoriteFilmsAction());
     }
-  }, [films, dispatch]);
+  }, [authorizationStatus, dispatch]);
+
+  const promoFilm = useAppSelector(getPromoFilm);
 
   return (
     <>
       <section className="film-card">
         <div className="film-card__bg">
-          <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
+          <img src={promoFilm.backgroundImage} alt={promoFilm.name} />
         </div>
 
         <h1 className="visually-hidden">WTW</h1>
@@ -47,30 +46,24 @@ export default function MainScreen({title, genre, releaseYear}: MainScreenProps)
         <div className="film-card__wrap">
           <div className="film-card__info">
             <div className="film-card__poster">
-              <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
+              <img src={promoFilm.posterImage} alt={promoFilm.name} width="218" height="327" />
             </div>
 
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
+              <h2 className="film-card__title">{promoFilm.name}</h2>
               <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseYear}</span>
+                <span className="film-card__genre">{promoFilm.genre}</span>
+                <span className="film-card__year">{promoFilm.released}</span>
               </p>
 
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <button className="btn btn--play film-card__button" onClick={() => navigate(`${AppRoute.Player}/${promoFilm.id}`)} type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                <FavoriteButton filmId={promoFilm.id}/>
               </div>
             </div>
           </div>
@@ -81,7 +74,7 @@ export default function MainScreen({title, genre, releaseYear}: MainScreenProps)
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
 
-          <GenreList currentGenre={currentGenre} genres={genres}/>
+          <GenreList />
 
           <MovieList />
 

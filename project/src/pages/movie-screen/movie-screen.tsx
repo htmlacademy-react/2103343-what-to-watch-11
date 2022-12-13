@@ -4,24 +4,20 @@ import { AppRoute, AuthorizationStatus, SIMILAR_COUNT } from '../../const';
 import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
-import { getAuthorization, getFilm, getFilmLoading, getReview, getSimilarFilms } from '../../selectors';
 import LoadingScreen from '../../components/loading/loading';
 import { fetchFilmAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import UserBlock from '../../components/user-block/user-block';
 import MovieSimilarList from '../../components/movie-similar-list/movie-similar-list';
+import { getFilm, getFilmReviews, getFilmReviewsStatus, getFilmStatus, getSimilarFilms, getSimilarFilmsStatus } from '../../store/films-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
+import FavoriteButton from '../../components/favorite-button/favorite-button';
 
 export default function MovieScreen(): JSX.Element {
-  const film = useAppSelector(getFilm);
-  const reviews = useAppSelector(getReview);
-  const similarFilms = useAppSelector(getSimilarFilms).slice(0, SIMILAR_COUNT);
 
   const params = useParams();
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
-
-  const isFilmLoading = useAppSelector(getFilmLoading);
-  const authorizationStatus = useAppSelector(getAuthorization);
+  const navigate = useNavigate();
 
   useEffect(() => {
 
@@ -33,12 +29,21 @@ export default function MovieScreen(): JSX.Element {
 
   }, [params.id, dispatch]);
 
+  const film = useAppSelector(getFilm);
+  const reviews = useAppSelector(getFilmReviews);
+  const similarFilms = useAppSelector(getSimilarFilms).slice(0, SIMILAR_COUNT);
+
+  const isFilmLoading = useAppSelector(getFilmStatus);
+  const isReviewsLoading = useAppSelector(getFilmReviewsStatus);
+  const isSimilarFilmsLoading = useAppSelector(getSimilarFilmsStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
   if (!film) {
     return (
       <Navigate replace to="/404" />
     );
   }
-  if (isFilmLoading) {
+  if (isFilmLoading || isReviewsLoading || isSimilarFilmsLoading) {
     return (
       <LoadingScreen />
     );
@@ -77,13 +82,7 @@ export default function MovieScreen(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </button>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
-                  <span>My list</span>
-                  <span className="film-card__count">9</span>
-                </button>
+                <FavoriteButton filmId={film.id}/>
                 {authorizationStatus === AuthorizationStatus.Auth && <Link className="btn film-card__button" to={`${AppRoute.Movie}/${film.id}/${AppRoute.AddReview}`}>Add review</Link>}
               </div>
             </div>

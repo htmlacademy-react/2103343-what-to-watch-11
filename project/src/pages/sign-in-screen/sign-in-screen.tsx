@@ -3,17 +3,17 @@ import Footer from '../../components/footer/footer';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { useRef, FormEvent, useEffect } from 'react';
-import { getAuthorization } from '../../selectors';
 import { loginAction } from '../../store/api-actions';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { AuthData } from '../../types/auth-data';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 export default function SignInScreen(): JSX.Element {
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
 
-  const authStatus = useAppSelector(getAuthorization);
+  const authStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 

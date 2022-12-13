@@ -1,18 +1,16 @@
 import Logo from '../../components/logo/logo';
-import { FilmType } from '../../types/types';
 import { AppRoute } from '../../const';
 import AddReview from '../../components/add-review/add-review';
-import { useParams, Link, Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
-import { getFilms } from '../../selectors';
+import UserBlock from '../../components/user-block/user-block';
+import { getFilm } from '../../store/films-data/selectors';
 
 export default function AddReviewScreen(): JSX.Element {
 
-  const films = useAppSelector(getFilms);
-  const params = useParams();
+  const film = useAppSelector(getFilm);
 
-  const film = films.find((elem: FilmType) => elem.id.toString() === params.id);
-  if (!film) {
+  if (film === undefined) {
     return (
       <Navigate replace to="/404" />
     );
@@ -36,21 +34,12 @@ export default function AddReviewScreen(): JSX.Element {
                 <Link to={`${AppRoute.Movie}/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <a className="breadcrumbs__link">Add review</a>
+                <span className="breadcrumbs__link">Add review</span>
               </li>
             </ul>
           </nav>
 
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63"/>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
-            </li>
-          </ul>
+          <UserBlock />
         </header>
 
         <div className="film-card__poster film-card__poster--small">
