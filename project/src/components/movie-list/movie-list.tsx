@@ -27,7 +27,7 @@ export default function MovieList(): JSX.Element {
 
   const showMoreHandler = () => setRenderedFilms(Math.min(preparedFilms.length, renderedFilms + SHOW_MORE_COUNT));
 
-  useEffect(() => setRenderedFilms(Math.min(preparedFilms.length, SHOW_MORE_COUNT)), [genge]);
+  useEffect(() => setRenderedFilms(Math.min(preparedFilms.length, SHOW_MORE_COUNT)), [preparedFilms.length, genge]);
 
   return (
     <>

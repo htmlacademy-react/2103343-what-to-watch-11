@@ -14,7 +14,7 @@ export type FilmsData = {
     films: {
         data: Films;
         isLoading: boolean;
-    }
+    };
 
     film?: FilmType;
     isFilmLoading: boolean;
@@ -22,19 +22,19 @@ export type FilmsData = {
     filmReviews: {
         data: Reviews;
         isLoading: boolean;
-    }
+    };
 
     promoFilm: FilmType;
 
     similarFilms: {
         data: Films;
         isLoading: boolean;
-    }
+    };
 
     favoriteFilms: {
         data: Films;
         isLoading: boolean;
-    }
+    };
 
     isReviewFormDisabled: boolean;
 };
