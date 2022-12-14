@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { useParams, useNavigate, Navigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import LoadingScreen from '../../components/loading/loading';
 import { APIRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions';
 import { getFilm, getFilmStatus } from '../../store/films-data/selectors';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 
 export default function PlayerScreen(): JSX.Element {
@@ -85,7 +86,7 @@ export default function PlayerScreen(): JSX.Element {
 
   if (film === undefined) {
     return (
-      <Navigate replace to="/404" />
+      <NotFoundScreen />
     );
   }
 
