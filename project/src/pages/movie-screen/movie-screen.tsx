@@ -1,7 +1,7 @@
 import Logo from '../../components/logo/logo';
 import Footer from '../../components/footer/footer';
 import { AppRoute, AuthorizationStatus, SIMILAR_COUNT } from '../../const';
-import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoadingScreen from '../../components/loading/loading';
@@ -12,6 +12,7 @@ import MovieSimilarList from '../../components/movie-similar-list/movie-similar-
 import { getFilm, getFilmReviews, getFilmReviewsStatus, getFilmStatus, getSimilarFilms, getSimilarFilmsStatus } from '../../store/films-data/selectors';
 import { getAuthorizationStatus } from '../../store/user-process/selectors';
 import FavoriteButton from '../../components/favorite-button/favorite-button';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 export default function MovieScreen(): JSX.Element {
 
@@ -44,7 +45,7 @@ export default function MovieScreen(): JSX.Element {
 
   if (!film) {
     return (
-      <Navigate replace to="/404" />
+      <NotFoundScreen />
     );
   }
   if (isFilmLoading || isReviewsLoading || isSimilarFilmsLoading) {

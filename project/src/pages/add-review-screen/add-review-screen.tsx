@@ -1,10 +1,11 @@
 import Logo from '../../components/logo/logo';
 import { AppRoute } from '../../const';
 import AddReview from '../../components/add-review/add-review';
-import { Link, Navigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
 import UserBlock from '../../components/user-block/user-block';
 import { getFilm } from '../../store/films-data/selectors';
+import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 export default function AddReviewScreen(): JSX.Element {
 
@@ -12,7 +13,7 @@ export default function AddReviewScreen(): JSX.Element {
 
   if (film === undefined) {
     return (
-      <Navigate replace to="/404" />
+      <NotFoundScreen />
     );
   }
   return (
