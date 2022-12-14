@@ -38,6 +38,6 @@ export enum NameSpace {
 
 export const GENRE_DEFAULT = 'All Genres';
 
-export const SHOW_MORE_COUNT = 4;
+export const SHOW_MORE_COUNT = 8;
 
 export const SIMILAR_COUNT = 4;

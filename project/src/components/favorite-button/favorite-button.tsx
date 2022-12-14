@@ -1,7 +1,10 @@
 import { memo } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { setFavoriteFilmAction } from '../../store/api-actions';
 import { getFavoriteFilms } from '../../store/films-data/selectors';
+import { getAuthorizationStatus } from '../../store/user-process/selectors';
 
 type FavoriteButtonProps = {
   filmId: number;
@@ -9,17 +12,19 @@ type FavoriteButtonProps = {
 
 function FavoriteButton({ filmId }: FavoriteButtonProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const favoriteFilms = useAppSelector(getFavoriteFilms);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const isFilmFavorite = favoriteFilms.some((film) => film.id === filmId);
 
   const handleFavoriteAddButtonClick = () => {
-    if (!isFilmFavorite) {
-      dispatch(setFavoriteFilmAction([filmId, true]));
-    } else {
-      dispatch(setFavoriteFilmAction([filmId, false]));
+    if (authorizationStatus === AuthorizationStatus.NoAuth) {
+      navigate(AppRoute.Login);
+      return;
     }
+    dispatch(setFavoriteFilmAction([filmId, !isFilmFavorite]));
   };
 
   return (

@@ -5,7 +5,7 @@ import { Link, useParams, useNavigate, Navigate } from 'react-router-dom';
 import MovieTabs from '../../components/movie-tabs/movie-tabs';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import LoadingScreen from '../../components/loading/loading';
-import { fetchFilmAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
+import { fetchFavoriteFilmsAction, fetchFilmAction, fetchFilmReviewsAction, fetchSimilarFilmsAction } from '../../store/api-actions';
 import { useEffect } from 'react';
 import UserBlock from '../../components/user-block/user-block';
 import MovieSimilarList from '../../components/movie-similar-list/movie-similar-list';
@@ -18,6 +18,7 @@ export default function MovieScreen(): JSX.Element {
   const params = useParams();
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
 
@@ -25,9 +26,12 @@ export default function MovieScreen(): JSX.Element {
       dispatch(fetchFilmAction(params.id));
       dispatch(fetchFilmReviewsAction(params.id));
       dispatch(fetchSimilarFilmsAction(params.id));
+      if (authorizationStatus === AuthorizationStatus.Auth) {
+        dispatch(fetchFavoriteFilmsAction());
+      }
     }
 
-  }, [params.id, dispatch]);
+  }, [params.id, dispatch, authorizationStatus]);
 
   const film = useAppSelector(getFilm);
   const reviews = useAppSelector(getFilmReviews);
@@ -36,7 +40,7 @@ export default function MovieScreen(): JSX.Element {
   const isFilmLoading = useAppSelector(getFilmStatus);
   const isReviewsLoading = useAppSelector(getFilmReviewsStatus);
   const isSimilarFilmsLoading = useAppSelector(getSimilarFilmsStatus);
-  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+
 
   if (!film) {
     return (

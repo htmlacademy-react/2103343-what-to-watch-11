@@ -22,3 +22,5 @@ export const getGenres = (films: FilmType[]): string[] => {
   const genres = new Set(films.map((film) => film.genre));
   return [GENRE_DEFAULT, ...genres];
 };
+
+export const getFormatReviewDate = (date: string) => new Date(date).toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: 'numeric' });

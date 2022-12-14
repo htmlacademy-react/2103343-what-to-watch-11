@@ -1,4 +1,5 @@
 import { ReviewType } from '../../types/types';
+import { getFormatReviewDate } from '../../utils';
 
 type MovieReviewProps = {
   review: ReviewType;
@@ -12,7 +13,7 @@ export default function MovieReview ({review}: MovieReviewProps): JSX.Element {
 
         <footer className="review__details">
           <cite className="review__author">{review.user.name}</cite>
-          <time className="review__date" dateTime={review.date}>{review.date}</time>
+          <time className="review__date" dateTime={review.date}>{getFormatReviewDate(review.date)}</time>
         </footer>
       </blockquote>
 
