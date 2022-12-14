@@ -1,17 +1,33 @@
 import Logo from '../../components/logo/logo';
 import { AppRoute } from '../../const';
 import AddReview from '../../components/add-review/add-review';
-import { Link } from 'react-router-dom';
-import { useAppSelector } from '../../hooks';
+import { Link, useParams } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../hooks';
 import UserBlock from '../../components/user-block/user-block';
-import { getFilm } from '../../store/films-data/selectors';
+import { getFilm, getFilmStatus } from '../../store/films-data/selectors';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
+import { fetchFilmAction } from '../../store/api-actions';
+import { useEffect } from 'react';
+import LoadingScreen from '../../components/loading/loading';
 
 export default function AddReviewScreen(): JSX.Element {
 
+  const params = useParams();
+  const dispatch = useAppDispatch();
   const film = useAppSelector(getFilm);
+  const isLoading = useAppSelector(getFilmStatus);
 
-  if (film === undefined) {
+  useEffect(() => {
+    if (params.id && film?.id.toString() !== params.id) {
+      dispatch(fetchFilmAction(params.id));
+    }
+  }, [dispatch, film?.id, params.id]);
+
+  if (isLoading && film) {
+    return <LoadingScreen />;
+  }
+
+  if (!film) {
     return (
       <NotFoundScreen />
     );

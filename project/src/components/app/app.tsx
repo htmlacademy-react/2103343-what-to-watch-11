@@ -49,7 +49,7 @@ function App(): JSX.Element {
           element={<MovieScreen />}
         />
         <Route
-          path={`${AppRoute.Movie}/:id${AppRoute.AddReview}`}
+          path={`${AppRoute.Movie}/:id/${AppRoute.AddReview}`}
           element={
             <PrivateRoute authorizationStatus={authorizationStatus}>
               <AddReviewScreen />
