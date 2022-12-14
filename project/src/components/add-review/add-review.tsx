@@ -1,6 +1,6 @@
-import { useState, SyntheticEvent, FormEvent } from 'react';
+import { useState, SyntheticEvent, BaseSyntheticEvent, ChangeEvent, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { APIRoute } from '../../const';
+import { APIRoute, CommentLength } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { commentAction } from '../../store/api-actions';
 import { setReviewFormDisabled } from '../../store/films-data/films-data';
@@ -22,16 +22,31 @@ export default function AddReview (): JSX.Element{
     comment: '',
   });
 
+  const isFormValid = useMemo(() =>
+    formData.rating !== null &&
+    formData.comment.length >= CommentLength.Min &&
+    formData.comment.length <= CommentLength.Max,
+  [formData.rating, formData.comment]);
+
   const handleFormChange = (evt: SyntheticEvent) => {
     const target = evt.target as HTMLInputElement | HTMLTextAreaElement;
     setFormData({...formData, [target.name]: target.value});
   };
 
-  const handleFormSubmit = (evt: FormEvent<HTMLFormElement>) => {
+  const handleTextChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
+    if (evt.target.value) {
+      setFormData({ ...formData, comment: evt.target.value });
+    } else {
+      setFormData({ ...formData, comment: '' });
+    }
+  };
+
+
+  const handleFormSubmit = (evt: BaseSyntheticEvent) => {
     evt.preventDefault();
     dispatch(setReviewFormDisabled(true));
 
-    if (formData.rating && formData.comment && film) {
+    if (formData.rating && formData.comment && film && isFormValid) {
       const [comment, rating] = [formData.comment, formData.rating];
       dispatch(commentAction([film.id, {comment, rating}]));
       navigate(`${APIRoute.Movies}/${film.id.toString()}`);
@@ -39,19 +54,19 @@ export default function AddReview (): JSX.Element{
   };
 
   return (
-    <form action="#" className="add-review__form" onChange={handleFormChange} onSubmit={handleFormSubmit}>
+    <form action="#" className="add-review__form" >
       <div className="rating">
-        <div className="rating__stars">
+        <div className="rating__stars" onChange={handleFormChange}>
 
-          {stars.map((number) => <RatingStars starId={number} key={number.toString()} disabled={isReviewFormDisabled}/>)}
+          {stars.map((number) => <RatingStars id={number} key={number.toString()} disabled={isReviewFormDisabled}/>)}
 
         </div>
       </div>
 
       <div className="add-review__text" >
-        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" defaultValue={formData.comment} disabled={isReviewFormDisabled}></textarea>
+        <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={handleTextChange} defaultValue={formData.comment} disabled={isReviewFormDisabled}></textarea>
         <div className="add-review__submit">
-          <button className="add-review__btn" type="submit" disabled={isReviewFormDisabled}>Post</button>
+          <button className="add-review__btn" onClick={handleFormSubmit} type="submit" disabled={!isFormValid || isReviewFormDisabled}>Post</button>
         </div>
       </div>
     </form>
