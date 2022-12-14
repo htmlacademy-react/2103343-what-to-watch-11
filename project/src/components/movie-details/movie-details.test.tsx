@@ -4,8 +4,6 @@ import HistoryRouter from '../history-route/history-route';
 import { filmMock } from '../../mocks/moks';
 import MovieDetails from './movie-details';
 
-
-
 const history = createMemoryHistory();
 const film = filmMock;
 describe('Component: FilmTabDetails', () => {
