@@ -14,7 +14,7 @@ export default function MovieList(): JSX.Element {
   const isAllGenre = genge === GENRE_DEFAULT;
 
   useEffect(() => {
-    if (films.length <= 0) {
+    if (!films.length) {
       dispatch(fetchFilmsAction());
     }
   }, [films, dispatch]);

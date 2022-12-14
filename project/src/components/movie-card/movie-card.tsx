@@ -1,6 +1,6 @@
 import {FilmType} from '../../types/types';
 import {AppRoute} from '../../const';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import { useState } from 'react';
 import VideoPlayer from '../video-player/video-player';
 
@@ -9,6 +9,7 @@ type MovieCardProps = {
 }
 
 export default function MovieCard ({film}: MovieCardProps): JSX.Element {
+  const navigate = useNavigate();
   const [activeCard, setActiveCard] = useState(false);
 
   const handleFilmCardMouseOver = () => {
@@ -16,7 +17,7 @@ export default function MovieCard ({film}: MovieCardProps): JSX.Element {
   };
 
   return (
-    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleFilmCardMouseOver} onMouseOut={() => setActiveCard(false)} data-testid="film">
+    <article className="small-film-card catalog__films-card" id={film.id.toString()} onMouseOver={handleFilmCardMouseOver} onMouseOut={() => setActiveCard(false)} onClick={() => navigate(`${AppRoute.Movie}/${film.id}`)} data-testid="film">
       <div className="small-film-card__image">
         {
           activeCard
