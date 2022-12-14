@@ -39,7 +39,8 @@ export const checkAuthAction = createAsyncThunk<void, undefined, {
 }>(
   'user/checkAuth',
   async (_arg, { extra: api }) => {
-    await api.get(APIRoute.Login);
+    const { data } = await api.get(APIRoute.Login);
+    return data;
   },
 );
 
@@ -53,6 +54,7 @@ export const loginAction = createAsyncThunk<void, AuthData, {
     const { data: { token } } = await api.post<UserData>(APIRoute.Login, {email, password});
     saveToken(token);
     dispatch(redirectToRoute(AppRoute.Main));
+    dispatch(checkAuthAction());
   },
 );
 
