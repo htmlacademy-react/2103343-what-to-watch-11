@@ -1,5 +1,5 @@
 import { Reviews } from '../../types/types';
-import MovieReview from '../movie-rewiew/movie-rewiew';
+import MovieReview from '../movie-review/movie-review';
 
 type MovieReviewsProps = {
   reviews: Reviews;

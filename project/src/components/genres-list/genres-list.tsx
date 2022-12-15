@@ -6,6 +6,7 @@ import { getGenres } from '../../utils';
 import { getGenre } from '../../store/films-process/selectors';
 import { getFilms } from '../../store/films-data/selectors';
 import { setGenre } from '../../store/films-process/films-process';
+import { MAX_GENRES_SHOWN } from '../../const';
 
 export default function GenreList(): JSX.Element {
 
@@ -16,7 +17,7 @@ export default function GenreList(): JSX.Element {
 
   return (
     <ul className="catalog__genres-list">
-      {genres.map((genre) => (
+      {genres.slice(0, MAX_GENRES_SHOWN).map((genre) => (
         <li
           key={genre}
           data-testid="genre"

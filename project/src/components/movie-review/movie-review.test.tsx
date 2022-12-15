@@ -1,8 +1,8 @@
 import { createMemoryHistory } from 'history';
 import { render, screen } from '@testing-library/react';
-import HistoryRouter from '../history-route/history-route';
+import HistoryRouter from '../history-router/history-router';
 import { reviewsMock } from '../../mocks/moks';
-import MovieReview from './movie-rewiew';
+import MovieReview from './movie-review';
 
 const history = createMemoryHistory();
 describe('Component: FilmReview', () => {

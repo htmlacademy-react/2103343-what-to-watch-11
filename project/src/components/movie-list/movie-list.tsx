@@ -25,7 +25,7 @@ export default function MovieList(): JSX.Element {
 
   const [renderedFilms, setRenderedFilms] = useState<number>(Math.min(preparedFilms.length, SHOW_MORE_COUNT));
 
-  const showMoreHandler = () => setRenderedFilms(Math.min(preparedFilms.length, renderedFilms + SHOW_MORE_COUNT));
+  const handleShowMoreBtnClick = () => setRenderedFilms(Math.min(preparedFilms.length, renderedFilms + SHOW_MORE_COUNT));
 
   useEffect(() => setRenderedFilms(Math.min(preparedFilms.length, SHOW_MORE_COUNT)), [preparedFilms.length, genge]);
 
@@ -36,7 +36,7 @@ export default function MovieList(): JSX.Element {
       </div>
       {renderedFilms < preparedFilms.length ?
         <div className="catalog__more">
-          <button className="catalog__button" type="button" onClick={showMoreHandler}>Show more</button>
+          <button className="catalog__button" type="button" onClick={handleShowMoreBtnClick}>Show more</button>
         </div>
         : null}
     </>
