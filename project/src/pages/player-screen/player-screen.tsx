@@ -5,6 +5,7 @@ import { APIRoute } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { fetchFilmAction } from '../../store/api-actions';
 import { getFilm, getFilmStatus } from '../../store/films-data/selectors';
+import { getFormatPlayerTime } from '../../utils';
 import NotFoundScreen from '../not-found-screen/not-found-screen';
 
 
@@ -129,7 +130,7 @@ export default function PlayerScreen(): JSX.Element {
             <progress className="player__progress" value={currentTime} max={durationTime}></progress>
             <div className="player__toggler" style={{left: progressValue}}>Toggler</div>
           </div>
-          <div className="player__time-value">{timeLeft}</div>
+          <div className="player__time-value">{getFormatPlayerTime(timeLeft)}</div>
         </div>
 
         <div className="player__controls-row">

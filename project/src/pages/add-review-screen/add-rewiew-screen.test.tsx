@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import { HelmetProvider } from 'react-helmet-async';
-import HistoryRouter from '../../components/history-route/history-route';
+import HistoryRouter from '../../components/history-router/history-router';
 import AddReviewScreen from './add-review-screen';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { filmMock } from '../../mocks/moks';

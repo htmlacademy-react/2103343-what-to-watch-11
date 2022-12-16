@@ -48,8 +48,13 @@ export default function AddReview (): JSX.Element{
 
     if (formData.rating && formData.comment && film && isFormValid) {
       const [comment, rating] = [formData.comment, formData.rating];
-      dispatch(commentAction([film.id, {comment, rating}]));
-      navigate(`${APIRoute.Movies}/${film.id.toString()}`);
+      const onSubmit = async () => {
+        await dispatch(commentAction([film.id, {comment, rating}]));
+      };
+      onSubmit().then(() => {
+        dispatch(setReviewFormDisabled(false));
+        navigate(`${APIRoute.Movies}/${film.id.toString()}`);
+      });
     }
   };
 
@@ -63,7 +68,7 @@ export default function AddReview (): JSX.Element{
         </div>
       </div>
 
-      <div className="add-review__text" >
+      <div className="add-review__text" style={{ backgroundColor: '#FFFFFF', opacity: '75%'}}>
         <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={handleTextChange} defaultValue={formData.comment} disabled={isReviewFormDisabled}></textarea>
         <div className="add-review__submit">
           <button className="add-review__btn" onClick={handleFormSubmit} type="submit" disabled={!isFormValid || isReviewFormDisabled}>Post</button>

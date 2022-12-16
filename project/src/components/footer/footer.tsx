@@ -1,6 +1,6 @@
 import Logo from '../../components/logo/logo';
 
-export default function FooterScreen(): JSX.Element{
+export default function Footer(): JSX.Element{
   return (
     <footer className="page-footer">
 

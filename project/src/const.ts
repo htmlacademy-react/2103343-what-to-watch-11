@@ -45,3 +45,9 @@ export const GENRE_DEFAULT = 'All Genres';
 export const SHOW_MORE_COUNT = 8;
 
 export const SIMILAR_COUNT = 4;
+
+export const MAX_GENRES_SHOWN = 10;
+
+export const EMAIL_PATTERN = /[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$/;
+
+export const PASSWORD_PATTERN = /([A-Za-z]+[0-9]|[0-9]+[A-Za-z])[A-Za-z0-9]*/;

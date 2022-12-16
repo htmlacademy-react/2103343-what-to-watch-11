@@ -24,3 +24,19 @@ export const getGenres = (films: FilmType[]): string[] => {
 };
 
 export const getFormatReviewDate = (date: string) => new Date(date).toLocaleDateString('en-us', { year: 'numeric', month: 'long', day: 'numeric' });
+
+export const getTimeFromMins = (mins: number) => {
+  const hours = Math.trunc(mins / 60);
+  const minutes = mins % 60;
+  return `${hours}h  ${minutes}m`;
+};
+
+export const getFormatPlayerTime = (time: number) => {
+  if (time >= 60) {
+    const hours = Math.floor(time / 60);
+    const minutes = time - hours * 60;
+    return `-${hours}:${minutes}:00`;
+  } else {
+    return `-${time}:00`;
+  }
+};
