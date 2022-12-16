@@ -63,7 +63,7 @@ export default function AddReview (): JSX.Element{
         </div>
       </div>
 
-      <div className="add-review__text" >
+      <div className="add-review__text" style={{ backgroundColor: '#FFFFFF', opacity: '75%'}}>
         <textarea className="add-review__textarea" name="review-text" id="review-text" placeholder="Review text" onChange={handleTextChange} defaultValue={formData.comment} disabled={isReviewFormDisabled}></textarea>
         <div className="add-review__submit">
           <button className="add-review__btn" onClick={handleFormSubmit} type="submit" disabled={!isFormValid || isReviewFormDisabled}>Post</button>
