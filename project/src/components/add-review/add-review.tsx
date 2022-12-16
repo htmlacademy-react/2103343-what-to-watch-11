@@ -48,8 +48,13 @@ export default function AddReview (): JSX.Element{
 
     if (formData.rating && formData.comment && film && isFormValid) {
       const [comment, rating] = [formData.comment, formData.rating];
-      dispatch(commentAction([film.id, {comment, rating}]));
-      navigate(`${APIRoute.Movies}/${film.id.toString()}`);
+      const onSubmit = async () => {
+        await dispatch(commentAction([film.id, {comment, rating}]));
+      };
+      onSubmit().then(() => {
+        dispatch(setReviewFormDisabled(false));
+        navigate(`${APIRoute.Movies}/${film.id.toString()}`);
+      });
     }
   };
 
