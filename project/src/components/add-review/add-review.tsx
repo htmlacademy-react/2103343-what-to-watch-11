@@ -1,6 +1,5 @@
 import { useState, SyntheticEvent, BaseSyntheticEvent, ChangeEvent, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { APIRoute, CommentLength } from '../../const';
+import { CommentLength } from '../../const';
 import { useAppDispatch, useAppSelector } from '../../hooks';
 import { commentAction } from '../../store/api-actions';
 import { setReviewFormDisabled } from '../../store/films-data/films-data';
@@ -11,7 +10,6 @@ import RatingStars from '../rating-stars/rating-stars';
 export default function AddReview (): JSX.Element{
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const film = useAppSelector(getFilm);
   const isReviewFormDisabled = useAppSelector(getReviewFormStatus);
 
@@ -48,13 +46,7 @@ export default function AddReview (): JSX.Element{
 
     if (formData.rating && formData.comment && film && isFormValid) {
       const [comment, rating] = [formData.comment, formData.rating];
-      const onSubmit = async () => {
-        await dispatch(commentAction([film.id, {comment, rating}]));
-      };
-      onSubmit().then(() => {
-        dispatch(setReviewFormDisabled(false));
-        navigate(`${APIRoute.Movies}/${film.id.toString()}`);
-      });
+      dispatch(commentAction([film.id, {comment, rating}]));
     }
   };
 
