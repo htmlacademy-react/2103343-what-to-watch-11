@@ -150,27 +150,6 @@ describe('Async actions', () => {
     ]);
   });
 
-  it('should dispatch postNewComment when POST /comments/{filmId}', async () => {
-    const fakeComment: AddReviewType = {comment: 'Good movie!', rating: 10};
-    const film = filmMock;
-
-    mockAPI
-      .onPost(`${APIRoute.Reviews}/${film.id}`)
-      .reply(200, []);
-
-
-    const store = mockStore();
-
-    await store.dispatch(commentAction([film.id,fakeComment]));
-
-    const actions = store.getActions().map(({type}) => type);
-
-    expect(actions).toEqual([
-      commentAction.pending.type,
-      commentAction.fulfilled.type
-    ]);
-  });
-
   it('should dispatch setFavoriteFilm when POST /favorite/{filmId}/{status}', async () => {
     const film = filmMock;
     const status = true;
